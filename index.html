@@ -301,12 +301,12 @@
         
           
             <p>第一篇博客决定写sublime text3的使用（python版），sublime text3是因为偶然的原因发现的，陡然发现这个轻量级的编辑器很好用，安利一下。</p>
-<h1 id="1、sublime-text3的使用"><a href="#1、sublime-text3的使用" class="headerlink" title="1、sublime text3的使用"></a>1、sublime text3的使用</h1><h1 id="1-1、sublime-text3的安装"><a href="#1-1、sublime-text3的安装" class="headerlink" title="1.1、sublime text3的安装"></a>1.1、sublime text3的安装</h1><p>sublime text3安装地址：<a href="http://www.sublimetext.com/" target="_blank" rel="noopener">sublime text3</a></p>
+<h1 id="sublime-text3的使用"><a href="#sublime-text3的使用" class="headerlink" title="sublime text3的使用"></a>sublime text3的使用</h1><h2 id="sublime-text3的安装"><a href="#sublime-text3的安装" class="headerlink" title="sublime text3的安装"></a>sublime text3的安装</h2><p>sublime text3安装地址：<a href="http://www.sublimetext.com/" target="_blank" rel="noopener">sublime text3</a></p>
 <p>window用户直接下载安装就好了，注意安装过程中会有选择项如下：</p>
 <p><img src="/2018/03/10/sublime-text3的使用python版/1.png" alt="option"></p>
 <p>这样Sublime Text可以被添加到右键中，在右键单击文件时，可以直接使用Sublime Text打开。</p>
-<h1 id="1-2、插件安装"><a href="#1-2、插件安装" class="headerlink" title="1.2、插件安装"></a>1.2、插件安装</h1><p>sublime text3有很多插件其中只有Package Control是需要在控制台输入python代码安装的，其他插件都可以在Package Control中直接安装。下面我们开始安装Package Control插件</p>
-<h3 id="1-2-1Package-Control安装"><a href="#1-2-1Package-Control安装" class="headerlink" title="1.2.1Package Control安装"></a>1.2.1Package Control安装</h3><p>(1)首先需要在sublime text3界面键入：Ctrl+`(`符号是Esc键下面的键，也是~键)，键入后，sublime text3如下所示：</p>
+<h2 id="插件安装"><a href="#插件安装" class="headerlink" title="插件安装"></a>插件安装</h2><p>sublime text3有很多插件其中只有Package Control是需要在控制台输入python代码安装的，其他插件都可以在Package Control中直接安装。下面我们开始安装Package Control插件</p>
+<h3 id="Package-Control安装"><a href="#Package-Control安装" class="headerlink" title="Package Control安装"></a>Package Control安装</h3><p>(1)首先需要在sublime text3界面键入：Ctrl+`(`符号是Esc键下面的键，也是~键)，键入后，sublime text3如下所示：</p>
 <p><img src="/2018/03/10/sublime-text3的使用python版/2.png" alt="Ctrl+\`"></p>
 <p>(2)在控制台输入部分（最后只有一行的小方框）输入代码（代码地址<a href="https://packagecontrol.io/installation#st2" target="_blank" rel="noopener">官网</a>）：</p>
 <p>sublime Text3：</p>
@@ -324,18 +324,18 @@
 <p>（3）输入SublimeCodeIntel，选中相应的插件安装即可。</p>
 <p>这里介绍下SublimeTmpl自定义模板的使用，如若需要自己编辑的模板，见<a href="http://blog.csdn.net/u011254082/article/details/51669889" target="_blank" rel="noopener">配置</a>:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ctrl+alt+h <span class="comment">#html模板</span></span><br><span class="line">ctrl+alt+j <span class="comment">#javascript模板</span></span><br><span class="line">ctrl+alt+c <span class="comment">#css模板</span></span><br><span class="line">ctrl+alt+p <span class="comment">#php模板</span></span><br><span class="line">ctrl+alt+r <span class="comment">#ruby模板</span></span><br><span class="line">ctrl+alt+shift+p <span class="comment">#python模板</span></span><br></pre></td></tr></table></figure>
-<h1 id="2、sublime-Text3-的python交互"><a href="#2、sublime-Text3-的python交互" class="headerlink" title="2、sublime Text3 的python交互"></a>2、sublime Text3 的python交互</h1><p>sublime Text3可以编辑多种语言，但是每次都要设置，这里为了方便python的交互使用，可以自己设置键位，如按F1进入python的ide界面，F2编译python文件。</p>
-<h2 id="2-1-安装SublimeREPL"><a href="#2-1-安装SublimeREPL" class="headerlink" title="2.1 安装SublimeREPL"></a>2.1 安装SublimeREPL</h2><p>（1）键入Ctrl+Shift+p，进入Package Control命令面板；</p>
+<h1 id="sublime-Text3-的python交互"><a href="#sublime-Text3-的python交互" class="headerlink" title="sublime Text3 的python交互"></a>sublime Text3 的python交互</h1><p>sublime Text3可以编辑多种语言，但是每次都要设置，这里为了方便python的交互使用，可以自己设置键位，如按F1进入python的ide界面，F2编译python文件。</p>
+<h2 id="安装SublimeREPL"><a href="#安装SublimeREPL" class="headerlink" title="安装SublimeREPL"></a>安装SublimeREPL</h2><p>（1）键入Ctrl+Shift+p，进入Package Control命令面板；</p>
 <p>（2）输入picp（会有默认选项）进入Package Control安装插件面板；（3）输入SublimeREPL，选中相应的插件安装即可。</p>
 <p>安装之后，通过选项Tools-&gt;SublimeREPL-&gt;Python，就能进入python的ide界面了</p>
-<h2 id="2-2键位绑定"><a href="#2-2键位绑定" class="headerlink" title="2.2键位绑定"></a>2.2键位绑定</h2><p>打开Preferences-&gt;Key Bindings-User，复制一下代码：</p>
+<h1 id="键位绑定"><a href="#键位绑定" class="headerlink" title="键位绑定"></a>键位绑定</h1><p>打开Preferences-&gt;Key Bindings-User，复制一下代码：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">"keys"</span>:[<span class="string">"f1"</span>],</span><br><span class="line"><span class="string">"caption"</span>: <span class="string">"SublimeREPL: Python"</span>,</span><br><span class="line"><span class="string">"command"</span>: <span class="string">"run_existing_window_command"</span>, <span class="string">"args"</span>:</span><br><span class="line">&#123;<span class="string">"id"</span>: <span class="string">"repl_python"</span>,</span><br><span class="line"><span class="string">"file"</span>: <span class="string">"config/Python/Main.sublime-menu"</span>&#125;&#125;</span><br></pre></td></tr></table></figure>
 <p>即可实现按F1进入python的ide。</p>
 <p><img src="/2018/03/10/sublime-text3的使用python版/4.png" alt="热键设置"></p>
 <p>同理，复制代码（注意两份代码之间需要加逗号）</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">"keys"</span>:[<span class="string">"f2"</span>],</span><br><span class="line"><span class="string">"caption"</span>: <span class="string">"SublimeREPL: Python - RUN current file"</span>,</span><br><span class="line"><span class="string">"command"</span>: <span class="string">"run_existing_window_command"</span>, <span class="string">"args"</span>:</span><br><span class="line">&#123;<span class="string">"id"</span>: <span class="string">"repl_python_run"</span>,</span><br><span class="line"><span class="string">"file"</span>: <span class="string">"config/Python/Main.sublime-menu"</span>&#125;&#125;</span><br></pre></td></tr></table></figure>
 <p>即可实现按F2编译python文件（文件编辑之后必须按Ctrl+s保存后，才能编译）。（参考<a href="https://www.zhihu.com/question/22904994" target="_blank" rel="noopener">知乎</a>）</p>
-<h1 id="3、其他介绍"><a href="#3、其他介绍" class="headerlink" title="3、其他介绍"></a>3、其他介绍</h1><p><a href="https://segmentfault.com/a/1190000004248611" target="_blank" rel="noopener">拓展插件介绍</a></p>
+<h1 id="其他介绍"><a href="#其他介绍" class="headerlink" title="其他介绍"></a>其他介绍</h1><p><a href="https://segmentfault.com/a/1190000004248611" target="_blank" rel="noopener">拓展插件介绍</a></p>
 
           
         
