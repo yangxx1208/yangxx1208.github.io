@@ -229,6 +229,157 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/10/cs231n1-6知识点/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xuebin Yang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="杨学斌的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/10/cs231n1-6知识点/" itemprop="url">cs231n1~6知识点</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-10T20:26:35+08:00">
+                2018-03-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>[TOC]</p>
+<p>​    本文档主要记录学习cs231n课程（2017）内容的笔记。    cs231n是计算机视觉相关的斯坦福大学课程，该课程主要就CNN模型进行讲解，其中也设计了一些基础的机器学习模型和算法，基本上每一章节都会有相应的实验内容来巩固学习。</p>
+<h1 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h1><p><a href="cs231n.github.io/python-numpy-tutorial/">Python Numpy Tutorial</a></p>
+<p><a href="http://www.mooc.ai/course/268/learn?lessonid=1819#lesson/1819" target="_blank" rel="noopener">2017视频</a></p>
+<p><a href="http://cs231n.stanford.edu/syllabus.html" target="_blank" rel="noopener">配套资料</a></p>
+<h1 id="Lecture1-Introduction"><a href="#Lecture1-Introduction" class="headerlink" title="Lecture1 Introduction"></a>Lecture1 Introduction</h1><p>​    课程一主要讲计算机视觉的发展史，计算机视觉的范畴，以及卷积神经网络在目前物体识别方面的重要地位。</p>
+<h1 id="Lecture2-Image-Classification-pipeline"><a href="#Lecture2-Image-Classification-pipeline" class="headerlink" title="Lecture2 Image Classification pipeline"></a>Lecture2 Image Classification pipeline</h1><h2 id="KNN"><a href="#KNN" class="headerlink" title="KNN"></a>KNN</h2><p>​    课程二首先以图片分类讲解了最简单的机器学习算法knn。这里贴上最近邻代码。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NearesetNeighbor</span>:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">  	<span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(self, X, y)</span>:</span></span><br><span class="line">  	<span class="string">"""X is N x D where each row is an example. Y is 1-dimension of size N（X是NxD的训练集，y是n维的label）"""</span></span><br><span class="line">  	self.Xtr = X</span><br><span class="line">  	self.ytr = y</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">predict</span><span class="params">(self, X)</span>:</span></span><br><span class="line">  	<span class="string">"""X is N x d where each row is an example we wish to predict label for(X是测试集)"""</span></span><br><span class="line">  	num_test = X.shape[<span class="number">0</span>]</span><br><span class="line">  	<span class="comment">#num_test是测试集的样例的个数</span></span><br><span class="line">  	Ypred = np.zeros(num_test, dtype = self.self.ytr.dtype)</span><br><span class="line"></span><br><span class="line">  	<span class="keyword">for</span> i <span class="keyword">in</span> xrange(num_test):</span><br><span class="line">  		distances = np.sum(np.abs(self.Xtr - X[i,:]), axis = <span class="number">1</span>)</span><br><span class="line">  		<span class="comment">#这里用到了广播机制</span></span><br><span class="line">  		min_index = np.argmin(distances)</span><br><span class="line">  		<span class="comment">#得到distances中的最小值的下标</span></span><br><span class="line">  		Ypred[i] = self.ytr[min_index]</span><br><span class="line">  	<span class="keyword">return</span> Ypred</span><br></pre></td></tr></table></figure>
+<p>​    课程还有讲述距离的概念，一般距离用范式来阐述，这里就不一一赘述了。</p>
+<p>​    课程也有提及到knn并不适用于处理图像，因为复杂度太高，距离运算不方便。</p>
+<h2 id="Linear-Classification"><a href="#Linear-Classification" class="headerlink" title="Linear Classification"></a>Linear Classification</h2><p>​    线性分类器，课程的叙述和一般的机器学习书籍内容相似，主要是引出优化和损失函数的问题，是lecture3的内容。</p>
+<h1 id="lecture3-Loss-Functions-and-Optimization"><a href="#lecture3-Loss-Functions-and-Optimization" class="headerlink" title="lecture3 Loss Functions and Optimization"></a>lecture3 Loss Functions and Optimization</h1><p>​    课程三主要讲损失函数和优化问题。</p>
+<h2 id="Hinge-loss"><a href="#Hinge-loss" class="headerlink" title="Hinge  loss"></a>Hinge  loss</h2><p><img src="/2018/03/10/cs231n1-6知识点/1.png" alt="Hinge loss"></p>
+<p>​    hinge loss是一种可以用来求解间隔最大化的问题，典型的就是SVM问题的求解。简单来说对于一个测试样例，其正确分类类别为$a_i$，预测结果为$[a_1,a_2,…,a_i,…a_n]$，分类器对其预测带来的损失是：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">$L_i$</th>
+<th style="text-align:left">$ = \sum_{j\not=y_i}max(0,a_j-a_i+1)$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right"></td>
+<td style="text-align:left">$=max(0,a_1-a_i+1)+max(0,a_2-a_i+1)+…+…max(a_n-a_i+1)$</td>
+</tr>
+</tbody>
+</table>
+<p>代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">L_i_vectorized</span><span class="params">(x,y,W)</span>:</span></span><br><span class="line">  scores = W.dot(x)</span><br><span class="line">  margins = np.maximum(<span class="number">0</span>, scores - scores[y] + <span class="number">1</span>)</span><br><span class="line">  margins[y] = <span class="number">0</span></span><br><span class="line">  loss_i = np.sum(margins)</span><br><span class="line">  <span class="keyword">return</span> loss_i</span><br></pre></td></tr></table></figure>
+<h2 id="Softmax-Classifier"><a href="#Softmax-Classifier" class="headerlink" title="Softmax Classifier"></a>Softmax Classifier</h2><p><img src="/2018/03/10/cs231n1-6知识点/2.png" alt="Hinge loss"></p>
+<h2 id="Optimization"><a href="#Optimization" class="headerlink" title="Optimization"></a>Optimization</h2><p>​    课程中主要讲梯度优化，简单来说就是对损失函数求导，得到梯度反馈到权值上。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/10/sublime-text3的使用python版/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -544,7 +695,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -738,6 +889,19 @@
 
 
 
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
 
 
 
