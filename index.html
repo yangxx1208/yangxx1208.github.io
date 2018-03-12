@@ -337,7 +337,53 @@
 <p><img src="/2018/03/10/cs231n1-6知识点/3.png" alt="对W求导"></p>
 <p><img src="/2018/03/10/cs231n1-6知识点/4.png" alt="对x求导"></p>
 <h2 id="Activation-function"><a href="#Activation-function" class="headerlink" title="Activation function"></a>Activation function</h2><p><img src="/2018/03/10/cs231n1-6知识点/5.png" alt="激活函数"></p>
-<h1 id="lecture5"><a href="#lecture5" class="headerlink" title="lecture5"></a>lecture5</h1>
+<h1 id="lecture5"><a href="#lecture5" class="headerlink" title="lecture5"></a>lecture5</h1><p>课程五是卷积神经网络的入门课程，这里先介绍一些术语：</p>
+<p>输入图像input image大小为N x N；</p>
+<p>卷积核（滤波器）的大小为K x K；</p>
+<p>stride为步长，是卷积核每次移动的像素数，记为S；</p>
+<p>pad为边缘填充0的个数记为P；</p>
+<p>输出图像的大小计算公式为：( N - K + 2*P ) / S + 1 。</p>
+<h1 id="Lecture6-Training-Neural-Networks-Part-I"><a href="#Lecture6-Training-Neural-Networks-Part-I" class="headerlink" title="Lecture6 Training Neural Networks, Part I"></a>Lecture6 Training Neural Networks, Part I</h1><h2 id="卷积网络overview"><a href="#卷积网络overview" class="headerlink" title="卷积网络overview"></a>卷积网络overview</h2><p>（1）：一次性设置（One time setup）：</p>
+<p>激活函数（Activation functions）</p>
+<p>预处理(Data </p>
+<p>Preprocessing)</p>
+<p>权值初始化（Weight Initialization）</p>
+<p>正则化(Regularization)</p>
+<p>梯度检查(Gradient checking)；</p>
+<p>（2）：动态训练（Training dynamics）：</p>
+<p>观察学习过程（Babysitting the learning process）</p>
+<p>参数更新（Parameter updates）</p>
+<p>超参数优化（Hyperparameter optimization ）</p>
+<p>（3）：评估（Evaluation）</p>
+<p>模型装配（model ensembles）</p>
+<h2 id="激活函数优缺点"><a href="#激活函数优缺点" class="headerlink" title="激活函数优缺点"></a>激活函数优缺点</h2><p><img src="/2018/03/10/cs231n1-6知识点/7.png" alt=""></p>
+<h3 id="Sigmoid"><a href="#Sigmoid" class="headerlink" title="Sigmoid"></a>Sigmoid</h3><p>​    Sigmoid函数是之前应用最为广泛的函数，因为其函数在两端接近于饱和，有很好的解释性（适合作为阈值函数）以及良好的导数性质。但在实际应用中Sigmoid函数缺点很明显：</p>
+<p>（1）容易出现梯度消失的现象（输入值过大过小，梯度为0；输入值为0时，梯度为无穷）；</p>
+<p>（2）Sigmoid函数的输出值不是以0为中心的，梯度更新时，只能往正方向或负方向更新（前一个神经元经过激活函数的输出全为正，在对当前神经元的权值W求导时，结果即皆为正或皆为负）；</p>
+<p><img src="/2018/03/10/cs231n1-6知识点/6.png" alt="Sigmoid"></p>
+<p>（3）Sigmoid有指数运算，计算代价太大。</p>
+<h3 id="tanh（x）"><a href="#tanh（x）" class="headerlink" title="tanh（x）"></a>tanh（x）</h3><p>​    虽然tanh()函数输出分布在（-1，1）,但还是会出现梯度消失的现象。</p>
+<h3 id="ReLU"><a href="#ReLU" class="headerlink" title="ReLU"></a>ReLU</h3><p>优点： ReLU 得到的SGD的收敛速度会比 sigmoid/tanh 快很多(如上图右)。有人说这是因为它是linear，而且梯度不会饱和；并且计算简单。</p>
+<p>缺点：ReLU在训练的时候很”脆弱”，一不小心有可能导致神经元”坏死”。（由于ReLU在x&lt;0时梯度为0，这样就导致负的梯度在这个ReLU被置零，而且这个神经元有可能再也不会被任何数据激活。如果这个情况发生了，那么这个神经元之后的梯度就永远是0了，也就是ReLU神经元坏死了，不再对任何数据有所响应）实际操作中，如果你的learning rate 很大，那么很有可能你网络中的40%的神经元都坏死了。 当然，如果你设置了一个合适的较小的learning rate，这个问题发生的情况其实也不会太频繁。</p>
+<h3 id="Leaky-ReLU"><a href="#Leaky-ReLU" class="headerlink" title="Leaky ReLU"></a>Leaky ReLU</h3><p>​    基本同ReLU，但是解决了ReLU神经元坏死的情况。</p>
+<h3 id="Maxout"><a href="#Maxout" class="headerlink" title="Maxout"></a>Maxout</h3><p>​    形式为$f(x)=max(w_1^Tx+b_1,w_2^Tx+b_2)$，是ReLU及Leaky ReLU的集成版，优点很明显，缺点是参数会增多。</p>
+<h3 id="建议"><a href="#建议" class="headerlink" title="建议"></a>建议</h3><p>​    使用ReLU，但是注意设置学习率，可以尝试Leaky ReLU/Maxout/ELU</p>
+<h2 id="Preprocess-the-data"><a href="#Preprocess-the-data" class="headerlink" title="Preprocess the data"></a>Preprocess the data</h2><p>​    数据归一化，作用：避免出现输入数据比较极端的情况（如输入全为正，则梯度更新方向则为正或为负），二者可以人为控制输入数据的分布，从而使得训练数据和测试数据尽可能分布相同。</p>
+<h2 id="Weight-Initialization"><a href="#Weight-Initialization" class="headerlink" title="Weight Initialization"></a>Weight Initialization</h2><p>​    权值初始化是一个非常值得研究的领域，在激活函数为tanh的网络中：</p>
+<p>（1）如果权值初始化过小（如$W=0.01*np.random.randn(fan_{in},fan_{out})$）,则在网络层数较深的网络中，权值会趋近于0。</p>
+<p>（2）如果权值初始化过大（如$W=1.0*np.random.randn(fan_{in},fan_{out})$）,则所有神经元会饱和，梯度为0。</p>
+<p>（3）比较合理的权值初始化$W=np.random.randn(fan_{in},fan_{out}) / np.sqrt(fan_{in})$</p>
+<p>​    <strong>如果激活函数是ReLU，由于只有大于0的部分会被激活，所以激活函数为$W=0.01*np.random.randn(fan_{in},fan_{out}) / np.sqrt(fan_{in}/2)$</strong></p>
+<h3 id="Batch-Normalization"><a href="#Batch-Normalization" class="headerlink" title="Batch Normalization"></a>Batch Normalization</h3><p>​    批量归一化通常是在全连接层和卷积层之后插入的，可以将输入数据的分布变为单位高斯函数。需要注意的是，批量归一化不仅仅是对每层网络输入数据的归一化，这里面还有一个变换重构的过程，目的是防止某层网络本身的作用是改变数据分布，这样就需要学习参数，让归一化的数据恢复到学习到的分布特征。批量归一化的优点有：<img src="/2018/03/10/cs231n1-6知识点/8.png" alt="Sigmoid"></p>
+<p>（1）改善了梯度在网络中的传播；</p>
+<p>（2）允许更高的学习率；</p>
+<p>（3）减少了网络对初始化的依赖程度；</p>
+<p>（4）改善正则化策略，可以减少使用dropout层（每个输入数据都是经过其他所有样本经验化均值、方差归一化而来）。</p>
+<h2 id="Babysitting-the-Learning-Process"><a href="#Babysitting-the-Learning-Process" class="headerlink" title="Babysitting the Learning Process"></a>Babysitting the Learning Process</h2><p>​    观察学习过程是为了监视训练过程，并及时调整超参数来获得比较好的结果。</p>
+<h3 id="完整性检查："><a href="#完整性检查：" class="headerlink" title="完整性检查："></a>完整性检查：</h3><p>​    （1）：在网络刚初始化时，可以通过计算网络损失函数的值，来判定网络是否完整（如共有十个类别，网络应当有9成判断为错）。</p>
+<p>​    （2）：从小数据集开始训练（此时网络足够复杂，可以完全拟合小数据集。）</p>
+<h3 id="确定学习率："><a href="#确定学习率：" class="headerlink" title="确定学习率："></a>确定学习率：</h3><h6 id="学习率过低，会导致loss值变化不大，收敛过慢；学习率过大，会导致网络不稳定。一般学习率设置为-1e-3-1e-5-之间，采用交叉验证，选取最佳的学习率。"><a href="#学习率过低，会导致loss值变化不大，收敛过慢；学习率过大，会导致网络不稳定。一般学习率设置为-1e-3-1e-5-之间，采用交叉验证，选取最佳的学习率。" class="headerlink" title="学习率过低，会导致loss值变化不大，收敛过慢；学习率过大，会导致网络不稳定。一般学习率设置为$[1e^{-3},1e^{-5}]$之间，采用交叉验证，选取最佳的学习率。"></a>学习率过低，会导致loss值变化不大，收敛过慢；学习率过大，会导致网络不稳定。一般学习率设置为$[1e^{-3},1e^{-5}]$之间，采用交叉验证，选取最佳的学习率。</h6><h2 id="Hyperparameter-Optimization"><a href="#Hyperparameter-Optimization" class="headerlink" title="Hyperparameter Optimization"></a>Hyperparameter Optimization</h2><p>​    超参数选取一般是在训练集上，选取几个粗略值，在几个epoch里进行交叉验证。粗略值可以通过经验选择，也可以通过随机选择。</p>
+
           
         
       
