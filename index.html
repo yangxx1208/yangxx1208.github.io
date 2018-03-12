@@ -382,7 +382,8 @@
 <h2 id="Babysitting-the-Learning-Process"><a href="#Babysitting-the-Learning-Process" class="headerlink" title="Babysitting the Learning Process"></a>Babysitting the Learning Process</h2><p>​    观察学习过程是为了监视训练过程，并及时调整超参数来获得比较好的结果。</p>
 <h3 id="完整性检查："><a href="#完整性检查：" class="headerlink" title="完整性检查："></a>完整性检查：</h3><p>​    （1）：在网络刚初始化时，可以通过计算网络损失函数的值，来判定网络是否完整（如共有十个类别，网络应当有9成判断为错）。</p>
 <p>​    （2）：从小数据集开始训练（此时网络足够复杂，可以完全拟合小数据集。）</p>
-<h3 id="确定学习率："><a href="#确定学习率：" class="headerlink" title="确定学习率："></a>确定学习率：</h3><h6 id="学习率过低，会导致loss值变化不大，收敛过慢；学习率过大，会导致网络不稳定。一般学习率设置为-1e-3-1e-5-之间，采用交叉验证，选取最佳的学习率。"><a href="#学习率过低，会导致loss值变化不大，收敛过慢；学习率过大，会导致网络不稳定。一般学习率设置为-1e-3-1e-5-之间，采用交叉验证，选取最佳的学习率。" class="headerlink" title="学习率过低，会导致loss值变化不大，收敛过慢；学习率过大，会导致网络不稳定。一般学习率设置为$[1e^{-3},1e^{-5}]$之间，采用交叉验证，选取最佳的学习率。"></a>学习率过低，会导致loss值变化不大，收敛过慢；学习率过大，会导致网络不稳定。一般学习率设置为$[1e^{-3},1e^{-5}]$之间，采用交叉验证，选取最佳的学习率。</h6><h2 id="Hyperparameter-Optimization"><a href="#Hyperparameter-Optimization" class="headerlink" title="Hyperparameter Optimization"></a>Hyperparameter Optimization</h2><p>​    超参数选取一般是在训练集上，选取几个粗略值，在几个epoch里进行交叉验证。粗略值可以通过经验选择，也可以通过随机选择。</p>
+<h3 id="确定学习率："><a href="#确定学习率：" class="headerlink" title="确定学习率："></a>确定学习率：</h3><p>​    学习率过低，会导致loss值变化不大，收敛过慢；学习率过大，会导致网络不稳定。一般学习率设置为$[1e^{-3},1e^{-5}]$之间，采用交叉验证，选取最佳的学习率。</p>
+<h2 id="Hyperparameter-Optimization"><a href="#Hyperparameter-Optimization" class="headerlink" title="Hyperparameter Optimization"></a>Hyperparameter Optimization</h2><p>​    超参数选取一般是在训练集上，选取几个粗略值，在几个epoch里进行交叉验证。粗略值可以通过经验选择，也可以通过随机选择。</p>
 
           
         
