@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="[TOC] Lecture7 Training Neural Networks, Part2梯度优化方法SGD（随机梯度下降）缺点： （1）容易在梯度大的方向做“之”型移动，在不敏感的梯度方向缓慢移动； （2）容易陷入局部极小值和鞍点中（局部极小值在网络结构小时表现严重，鞍点在网络结构大时表现严重）； （3）对噪声比较敏感（现实中，数据存在噪声不可避免） SGD+Momentum ​    增加动">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cs231n7-9知识点">
+<meta property="og:url" content="http://yoursite.com/2018/03/12/cs231n7-9知识点/index.html">
+<meta property="og:site_name" content="杨学斌的博客">
+<meta property="og:description" content="[TOC] Lecture7 Training Neural Networks, Part2梯度优化方法SGD（随机梯度下降）缺点： （1）容易在梯度大的方向做“之”型移动，在不敏感的梯度方向缓慢移动； （2）容易陷入局部极小值和鞍点中（局部极小值在网络结构小时表现严重，鞍点在网络结构大时表现严重）； （3）对噪声比较敏感（现实中，数据存在噪声不可避免） SGD+Momentum ​    增加动">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/03/12/cs231n7-9知识点/1.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/12/cs231n7-9知识点/2.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/12/cs231n7-9知识点/3.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/12/cs231n7-9知识点/4.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/12/cs231n7-9知识点/5.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/12/cs231n7-9知识点/6.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/12/cs231n7-9知识点/7.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/12/cs231n7-9知识点/8.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/12/cs231n7-9知识点/9.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/12/cs231n7-9知识点/10.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/12/cs231n7-9知识点/11.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/12/cs231n7-9知识点/12.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/12/cs231n7-9知识点/13.png">
+<meta property="og:updated_time" content="2018-03-16T04:49:22.410Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="cs231n7-9知识点">
+<meta name="twitter:description" content="[TOC] Lecture7 Training Neural Networks, Part2梯度优化方法SGD（随机梯度下降）缺点： （1）容易在梯度大的方向做“之”型移动，在不敏感的梯度方向缓慢移动； （2）容易陷入局部极小值和鞍点中（局部极小值在网络结构小时表现严重，鞍点在网络结构大时表现严重）； （3）对噪声比较敏感（现实中，数据存在噪声不可避免） SGD+Momentum ​    增加动">
+<meta name="twitter:image" content="http://yoursite.com/2018/03/12/cs231n7-9知识点/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/03/12/cs231n7-9知识点/"/>
+
+
+
+
+
+  <title>cs231n7-9知识点 | 杨学斌的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">杨学斌的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/12/cs231n7-9知识点/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xuebin Yang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="杨学斌的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">cs231n7-9知识点</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-12T16:04:49+08:00">
+                2018-03-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/03/12/cs231n7-9知识点/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/03/12/cs231n7-9知识点/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>[TOC]</p>
+<h3 id="Lecture7-Training-Neural-Networks-Part2"><a href="#Lecture7-Training-Neural-Networks-Part2" class="headerlink" title="Lecture7 Training Neural Networks, Part2"></a>Lecture7 Training Neural Networks, Part2</h3><h2 id="梯度优化方法"><a href="#梯度优化方法" class="headerlink" title="梯度优化方法"></a>梯度优化方法</h2><h3 id="SGD（随机梯度下降）"><a href="#SGD（随机梯度下降）" class="headerlink" title="SGD（随机梯度下降）"></a>SGD（随机梯度下降）</h3><p>缺点：</p>
+<p>（1）容易在梯度大的方向做“之”型移动，在不敏感的梯度方向缓慢移动；</p>
+<p>（2）容易陷入局部极小值和鞍点中（局部极小值在网络结构小时表现严重，鞍点在网络结构大时表现严重）；</p>
+<p>（3）对噪声比较敏感（现实中，数据存在噪声不可避免）</p>
+<h3 id="SGD-Momentum"><a href="#SGD-Momentum" class="headerlink" title="SGD+Momentum"></a>SGD+Momentum</h3><p><img src="/2018/03/12/cs231n7-9知识点/1.png" alt=""></p>
+<p>​    增加动量的方式可以解决SGD的缺点，因为动量可以对梯度方向相反的方向互相抵消，从而抵消“之”字型的上下摆动，对梯度方向相同的的方向有一个加速的效果，从而即使在梯度为0的鞍点或者梯度变化较小的局部极值点，该点依旧包含速度（同引入加速度相同）。</p>
+<h3 id="Nesterov-Momentum"><a href="#Nesterov-Momentum" class="headerlink" title="Nesterov Momentum"></a>Nesterov Momentum</h3><p><img src="/2018/03/12/cs231n7-9知识点/2.png" alt=""></p>
+<h3 id="AdaGrad"><a href="#AdaGrad" class="headerlink" title="AdaGrad"></a>AdaGrad</h3><p><img src="/2018/03/12/cs231n7-9知识点/3.png" alt=""></p>
+<p>优点：</p>
+<p>​    在凸函数可以收敛得很好。</p>
+<p>缺点：</p>
+<p>​    在非凸函数下容易陷入局部极小值。</p>
+<h3 id="RMSProp"><a href="#RMSProp" class="headerlink" title="RMSProp"></a>RMSProp</h3><p><img src="/2018/03/12/cs231n7-9知识点/4.png" alt=""></p>
+<h3 id="Adam"><a href="#Adam" class="headerlink" title="Adam"></a>Adam</h3><h4 id="almost形式"><a href="#almost形式" class="headerlink" title="almost形式"></a>almost形式</h4><p><img src="/2018/03/12/cs231n7-9知识点/5.png" alt=""></p>
+<h4 id="full-form"><a href="#full-form" class="headerlink" title="full form"></a>full form</h4><p><img src="/2018/03/12/cs231n7-9知识点/6.png" alt=""></p>
+<h3 id="特殊优化方法L-BFGS"><a href="#特殊优化方法L-BFGS" class="headerlink" title="特殊优化方法L-BFGS"></a>特殊优化方法L-BFGS</h3><p>​    类似于每次用低级的函数逼近原函数，求最小值。从而不需要设置学习率直接求解。一般用于凸函数，且随机性不高的情况下。</p>
+<h2 id="学习率"><a href="#学习率" class="headerlink" title="学习率"></a>学习率</h2><p><img src="/2018/03/12/cs231n7-9知识点/7.png" alt=""></p>
+<p>​    学习率可以通过衰减的方式，来综合各种学习率的优势。需要注意的是，学习率衰减的参数是在观察损失函数之后设定的。</p>
+<h2 id="正则化"><a href="#正则化" class="headerlink" title="正则化"></a>正则化</h2><h3 id="dropout"><a href="#dropout" class="headerlink" title="dropout"></a>dropout</h3><p>​    每次随机使一些神经元置0，从而达到正则化的效果。一般在全连接层使用，或者对某整个卷积核。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">p = <span class="number">0.5</span> <span class="comment">#神经元置0率</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">train_step</span><span class="params">(X)</span>:</span></span><br><span class="line">    H1 = np.maximum(<span class="number">0</span>, np.dot(W1, X) + b1)</span><br><span class="line">    U1 = np.random.rand(*H1.shape) &lt; p</span><br><span class="line">    H1 *= U1 <span class="comment">#将部分神经元置0 </span></span><br><span class="line">    H2 = np.maximum(<span class="number">0</span>, np.dot(W2, X) + b2)</span><br><span class="line">    U2 = np.random.rand(*H2.shape) &lt; p</span><br><span class="line">    H2 *= U2 <span class="comment">#将部分神经元置0 </span></span><br><span class="line">    out = np.dot(W3, H2) + b3</span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">predict</span><span class="params">(X)</span>:</span></span><br><span class="line">    H1 = np.maximum(<span class="number">0</span>, np.dot(W1, X) + b1)*p</span><br><span class="line">    H2 = np.maximun(<span class="number">0</span>, np.dot(W2, H1) + b2)*p</span><br><span class="line">    out = np.dot(W3, H2) + b3</span><br></pre></td></tr></table></figure>
+<h3 id="batch-normalization"><a href="#batch-normalization" class="headerlink" title="batch normalization"></a>batch normalization</h3><p>​    批量归一化，因为将所有的数据都尽可能放在同一个分布上，从而减弱了数据的随机性，而达到归一化的效果。</p>
+<h3 id="数据增强"><a href="#数据增强" class="headerlink" title="数据增强"></a>数据增强</h3><p>​    对图像进行翻转、旋转、剪切、色彩抖动等，从而扩充数据集，增加了随机性。</p>
+<h3 id="DropConnect"><a href="#DropConnect" class="headerlink" title="DropConnect"></a>DropConnect</h3><p>​    同Dropout类似，不同于Dropout将激活函数置0，将权重矩阵的一些值置0， 从而达到同样的效果。</p>
+<h3 id="Fractional-Max-Pooling"><a href="#Fractional-Max-Pooling" class="headerlink" title="Fractional Max Pooling"></a>Fractional Max Pooling</h3><p>​    部分最大池化：对图像进行随机池化，从而抵消随机性。</p>
+<h3 id="Stochastic-Depth"><a href="#Stochastic-Depth" class="headerlink" title="Stochastic Depth"></a>Stochastic Depth</h3><p>​    随机深度：在训练时消除部分层。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>​    通常batch normalization就足够正则化了，但是如果发现模型在训练集比测试集效果好太多时，可以尝试其他的正则化方法。而且，需要特别指出的是，相较于其他正则化方法而言，batch normalization不可以控制正则化程度。</p>
+<h2 id="Transfer-Learning"><a href="#Transfer-Learning" class="headerlink" title="Transfer Learning"></a>Transfer Learning</h2><p>​    迁移学习是解决数据集较小的一个常用的方法。</p>
+<p><img src="/2018/03/12/cs231n7-9知识点/8.png" alt=""></p>
+<h1 id="Lecture8-Deep-Learning-Software"><a href="#Lecture8-Deep-Learning-Software" class="headerlink" title="Lecture8 Deep Learning Software"></a>Lecture8 Deep Learning Software</h1><p>​    主要讲Tensor flow、PyTorch、Caffe实现深度学习网络结构。总体建议：</p>
+<p>Tensor flow是最稳妥的选择，因为使用范围广。PyTorch更适合研究。产品、手机端应用开发选择Tensor flow或者caffe2更好一些。</p>
+<h1 id="Lecture9-CNN-Architecture"><a href="#Lecture9-CNN-Architecture" class="headerlink" title="Lecture9  CNN Architecture"></a>Lecture9  CNN Architecture</h1><p>​    主要讲当前比较流行的网络结构，如GoogLeNet、ResNet等。里面Inception模块、bottleneck（瓶颈层）、ResNet、fire模块的概念都比较重要。</p>
+<h3 id="Inception模块"><a href="#Inception模块" class="headerlink" title="Inception模块"></a>Inception模块</h3><p><img src="/2018/03/12/cs231n7-9知识点/9.png" alt=""></p>
+<h3 id="bottleneck"><a href="#bottleneck" class="headerlink" title="bottleneck"></a>bottleneck</h3><p><img src="/2018/03/12/cs231n7-9知识点/10.png" alt=""></p>
+<h3 id="ResNet"><a href="#ResNet" class="headerlink" title="ResNet"></a>ResNet</h3><p><img src="/2018/03/12/cs231n7-9知识点/11.png" alt=""></p>
+<h3 id="Fire模块"><a href="#Fire模块" class="headerlink" title="Fire模块"></a>Fire模块</h3><p><img src="/2018/03/12/cs231n7-9知识点/12.png" alt=""></p>
+<h3 id="网络复杂VS效率比较图"><a href="#网络复杂VS效率比较图" class="headerlink" title="网络复杂VS效率比较图"></a>网络复杂VS效率比较图</h3><p><img src="/2018/03/12/cs231n7-9知识点/13.png" alt=""></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/10/cs231n1-6知识点/" rel="next" title="cs231n1~6知识点">
+                <i class="fa fa-chevron-left"></i> cs231n1~6知识点
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Xuebin Yang</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Lecture7-Training-Neural-Networks-Part2"><span class="nav-number">1.</span> <span class="nav-text">Lecture7 Training Neural Networks, Part2</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#梯度优化方法"><span class="nav-number"></span> <span class="nav-text">梯度优化方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SGD（随机梯度下降）"><span class="nav-number">1.</span> <span class="nav-text">SGD（随机梯度下降）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SGD-Momentum"><span class="nav-number">2.</span> <span class="nav-text">SGD+Momentum</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Nesterov-Momentum"><span class="nav-number">3.</span> <span class="nav-text">Nesterov Momentum</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AdaGrad"><span class="nav-number">4.</span> <span class="nav-text">AdaGrad</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RMSProp"><span class="nav-number">5.</span> <span class="nav-text">RMSProp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Adam"><span class="nav-number">6.</span> <span class="nav-text">Adam</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#almost形式"><span class="nav-number">6.1.</span> <span class="nav-text">almost形式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#full-form"><span class="nav-number">6.2.</span> <span class="nav-text">full form</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特殊优化方法L-BFGS"><span class="nav-number">7.</span> <span class="nav-text">特殊优化方法L-BFGS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#学习率"><span class="nav-number"></span> <span class="nav-text">学习率</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正则化"><span class="nav-number"></span> <span class="nav-text">正则化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#dropout"><span class="nav-number">1.</span> <span class="nav-text">dropout</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#batch-normalization"><span class="nav-number">2.</span> <span class="nav-text">batch normalization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据增强"><span class="nav-number">3.</span> <span class="nav-text">数据增强</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DropConnect"><span class="nav-number">4.</span> <span class="nav-text">DropConnect</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Fractional-Max-Pooling"><span class="nav-number">5.</span> <span class="nav-text">Fractional Max Pooling</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stochastic-Depth"><span class="nav-number">6.</span> <span class="nav-text">Stochastic Depth</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Transfer-Learning"><span class="nav-number"></span> <span class="nav-text">Transfer Learning</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lecture8-Deep-Learning-Software"><span class="nav-number"></span> <span class="nav-text">Lecture8 Deep Learning Software</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lecture9-CNN-Architecture"><span class="nav-number"></span> <span class="nav-text">Lecture9  CNN Architecture</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Inception模块"><span class="nav-number">1.</span> <span class="nav-text">Inception模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bottleneck"><span class="nav-number">2.</span> <span class="nav-text">bottleneck</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ResNet"><span class="nav-number">3.</span> <span class="nav-text">ResNet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Fire模块"><span class="nav-number">4.</span> <span class="nav-text">Fire模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网络复杂VS效率比较图"><span class="nav-number">5.</span> <span class="nav-text">网络复杂VS效率比较图</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xuebin Yang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'yangxx1208',
+            repo: 'yangxx1208.github.io',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'dbf224b276ddf73768bdcaa9a32dd2dfb76fbf87',
+            
+                client_id: '255d271f2f4e0f870265'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

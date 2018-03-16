@@ -229,6 +229,162 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/12/cs231n7-9知识点/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xuebin Yang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="杨学斌的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/12/cs231n7-9知识点/" itemprop="url">cs231n7-9知识点</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-12T16:04:49+08:00">
+                2018-03-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>[TOC]</p>
+<h3 id="Lecture7-Training-Neural-Networks-Part2"><a href="#Lecture7-Training-Neural-Networks-Part2" class="headerlink" title="Lecture7 Training Neural Networks, Part2"></a>Lecture7 Training Neural Networks, Part2</h3><h2 id="梯度优化方法"><a href="#梯度优化方法" class="headerlink" title="梯度优化方法"></a>梯度优化方法</h2><h3 id="SGD（随机梯度下降）"><a href="#SGD（随机梯度下降）" class="headerlink" title="SGD（随机梯度下降）"></a>SGD（随机梯度下降）</h3><p>缺点：</p>
+<p>（1）容易在梯度大的方向做“之”型移动，在不敏感的梯度方向缓慢移动；</p>
+<p>（2）容易陷入局部极小值和鞍点中（局部极小值在网络结构小时表现严重，鞍点在网络结构大时表现严重）；</p>
+<p>（3）对噪声比较敏感（现实中，数据存在噪声不可避免）</p>
+<h3 id="SGD-Momentum"><a href="#SGD-Momentum" class="headerlink" title="SGD+Momentum"></a>SGD+Momentum</h3><p><img src="/2018/03/12/cs231n7-9知识点/1.png" alt=""></p>
+<p>​    增加动量的方式可以解决SGD的缺点，因为动量可以对梯度方向相反的方向互相抵消，从而抵消“之”字型的上下摆动，对梯度方向相同的的方向有一个加速的效果，从而即使在梯度为0的鞍点或者梯度变化较小的局部极值点，该点依旧包含速度（同引入加速度相同）。</p>
+<h3 id="Nesterov-Momentum"><a href="#Nesterov-Momentum" class="headerlink" title="Nesterov Momentum"></a>Nesterov Momentum</h3><p><img src="/2018/03/12/cs231n7-9知识点/2.png" alt=""></p>
+<h3 id="AdaGrad"><a href="#AdaGrad" class="headerlink" title="AdaGrad"></a>AdaGrad</h3><p><img src="/2018/03/12/cs231n7-9知识点/3.png" alt=""></p>
+<p>优点：</p>
+<p>​    在凸函数可以收敛得很好。</p>
+<p>缺点：</p>
+<p>​    在非凸函数下容易陷入局部极小值。</p>
+<h3 id="RMSProp"><a href="#RMSProp" class="headerlink" title="RMSProp"></a>RMSProp</h3><p><img src="/2018/03/12/cs231n7-9知识点/4.png" alt=""></p>
+<h3 id="Adam"><a href="#Adam" class="headerlink" title="Adam"></a>Adam</h3><h4 id="almost形式"><a href="#almost形式" class="headerlink" title="almost形式"></a>almost形式</h4><p><img src="/2018/03/12/cs231n7-9知识点/5.png" alt=""></p>
+<h4 id="full-form"><a href="#full-form" class="headerlink" title="full form"></a>full form</h4><p><img src="/2018/03/12/cs231n7-9知识点/6.png" alt=""></p>
+<h3 id="特殊优化方法L-BFGS"><a href="#特殊优化方法L-BFGS" class="headerlink" title="特殊优化方法L-BFGS"></a>特殊优化方法L-BFGS</h3><p>​    类似于每次用低级的函数逼近原函数，求最小值。从而不需要设置学习率直接求解。一般用于凸函数，且随机性不高的情况下。</p>
+<h2 id="学习率"><a href="#学习率" class="headerlink" title="学习率"></a>学习率</h2><p><img src="/2018/03/12/cs231n7-9知识点/7.png" alt=""></p>
+<p>​    学习率可以通过衰减的方式，来综合各种学习率的优势。需要注意的是，学习率衰减的参数是在观察损失函数之后设定的。</p>
+<h2 id="正则化"><a href="#正则化" class="headerlink" title="正则化"></a>正则化</h2><h3 id="dropout"><a href="#dropout" class="headerlink" title="dropout"></a>dropout</h3><p>​    每次随机使一些神经元置0，从而达到正则化的效果。一般在全连接层使用，或者对某整个卷积核。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">p = <span class="number">0.5</span> <span class="comment">#神经元置0率</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">train_step</span><span class="params">(X)</span>:</span></span><br><span class="line">    H1 = np.maximum(<span class="number">0</span>, np.dot(W1, X) + b1)</span><br><span class="line">    U1 = np.random.rand(*H1.shape) &lt; p</span><br><span class="line">    H1 *= U1 <span class="comment">#将部分神经元置0 </span></span><br><span class="line">    H2 = np.maximum(<span class="number">0</span>, np.dot(W2, X) + b2)</span><br><span class="line">    U2 = np.random.rand(*H2.shape) &lt; p</span><br><span class="line">    H2 *= U2 <span class="comment">#将部分神经元置0 </span></span><br><span class="line">    out = np.dot(W3, H2) + b3</span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">predict</span><span class="params">(X)</span>:</span></span><br><span class="line">    H1 = np.maximum(<span class="number">0</span>, np.dot(W1, X) + b1)*p</span><br><span class="line">    H2 = np.maximun(<span class="number">0</span>, np.dot(W2, H1) + b2)*p</span><br><span class="line">    out = np.dot(W3, H2) + b3</span><br></pre></td></tr></table></figure>
+<h3 id="batch-normalization"><a href="#batch-normalization" class="headerlink" title="batch normalization"></a>batch normalization</h3><p>​    批量归一化，因为将所有的数据都尽可能放在同一个分布上，从而减弱了数据的随机性，而达到归一化的效果。</p>
+<h3 id="数据增强"><a href="#数据增强" class="headerlink" title="数据增强"></a>数据增强</h3><p>​    对图像进行翻转、旋转、剪切、色彩抖动等，从而扩充数据集，增加了随机性。</p>
+<h3 id="DropConnect"><a href="#DropConnect" class="headerlink" title="DropConnect"></a>DropConnect</h3><p>​    同Dropout类似，不同于Dropout将激活函数置0，将权重矩阵的一些值置0， 从而达到同样的效果。</p>
+<h3 id="Fractional-Max-Pooling"><a href="#Fractional-Max-Pooling" class="headerlink" title="Fractional Max Pooling"></a>Fractional Max Pooling</h3><p>​    部分最大池化：对图像进行随机池化，从而抵消随机性。</p>
+<h3 id="Stochastic-Depth"><a href="#Stochastic-Depth" class="headerlink" title="Stochastic Depth"></a>Stochastic Depth</h3><p>​    随机深度：在训练时消除部分层。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>​    通常batch normalization就足够正则化了，但是如果发现模型在训练集比测试集效果好太多时，可以尝试其他的正则化方法。而且，需要特别指出的是，相较于其他正则化方法而言，batch normalization不可以控制正则化程度。</p>
+<h2 id="Transfer-Learning"><a href="#Transfer-Learning" class="headerlink" title="Transfer Learning"></a>Transfer Learning</h2><p>​    迁移学习是解决数据集较小的一个常用的方法。</p>
+<p><img src="/2018/03/12/cs231n7-9知识点/8.png" alt=""></p>
+<h1 id="Lecture8-Deep-Learning-Software"><a href="#Lecture8-Deep-Learning-Software" class="headerlink" title="Lecture8 Deep Learning Software"></a>Lecture8 Deep Learning Software</h1><p>​    主要讲Tensor flow、PyTorch、Caffe实现深度学习网络结构。总体建议：</p>
+<p>Tensor flow是最稳妥的选择，因为使用范围广。PyTorch更适合研究。产品、手机端应用开发选择Tensor flow或者caffe2更好一些。</p>
+<h1 id="Lecture9-CNN-Architecture"><a href="#Lecture9-CNN-Architecture" class="headerlink" title="Lecture9  CNN Architecture"></a>Lecture9  CNN Architecture</h1><p>​    主要讲当前比较流行的网络结构，如GoogLeNet、ResNet等。里面Inception模块、bottleneck（瓶颈层）、ResNet、fire模块的概念都比较重要。</p>
+<h3 id="Inception模块"><a href="#Inception模块" class="headerlink" title="Inception模块"></a>Inception模块</h3><p><img src="/2018/03/12/cs231n7-9知识点/9.png" alt=""></p>
+<h3 id="bottleneck"><a href="#bottleneck" class="headerlink" title="bottleneck"></a>bottleneck</h3><p><img src="/2018/03/12/cs231n7-9知识点/10.png" alt=""></p>
+<h3 id="ResNet"><a href="#ResNet" class="headerlink" title="ResNet"></a>ResNet</h3><p><img src="/2018/03/12/cs231n7-9知识点/11.png" alt=""></p>
+<h3 id="Fire模块"><a href="#Fire模块" class="headerlink" title="Fire模块"></a>Fire模块</h3><p><img src="/2018/03/12/cs231n7-9知识点/12.png" alt=""></p>
+<h3 id="网络复杂VS效率比较图"><a href="#网络复杂VS效率比较图" class="headerlink" title="网络复杂VS效率比较图"></a>网络复杂VS效率比较图</h3><p><img src="/2018/03/12/cs231n7-9知识点/13.png" alt=""></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/10/cs231n1-6知识点/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -370,11 +526,11 @@
 <h3 id="建议"><a href="#建议" class="headerlink" title="建议"></a>建议</h3><p>​    使用ReLU，但是注意设置学习率，可以尝试Leaky ReLU/Maxout/ELU</p>
 <h2 id="Preprocess-the-data"><a href="#Preprocess-the-data" class="headerlink" title="Preprocess the data"></a>Preprocess the data</h2><p>​    数据归一化，作用：避免出现输入数据比较极端的情况（如输入全为正，则梯度更新方向则为正或为负），二者可以人为控制输入数据的分布，从而使得训练数据和测试数据尽可能分布相同。</p>
 <h2 id="Weight-Initialization"><a href="#Weight-Initialization" class="headerlink" title="Weight Initialization"></a>Weight Initialization</h2><p>​    权值初始化是一个非常值得研究的领域，在激活函数为tanh的网络中：</p>
-<p>（1）如果权值初始化过小（如$W=0.01*np.random.randn(fan_{in},fan_{out})$）,则在网络层数较深的网络中，权值会趋近于0。</p>
+<p>（1）如果权值初始化过小（如$W=0.01*np.random.randn(fan_{in},fan_{out})$）,则在网络层数较深的网络中，激活值会趋近于0（网络层数较深时，权值累乘会接近于0）。</p>
 <p>（2）如果权值初始化过大（如$W=1.0*np.random.randn(fan_{in},fan_{out})$）,则所有神经元会饱和，梯度为0。</p>
 <p>（3）比较合理的权值初始化$W=np.random.randn(fan_{in},fan_{out}) / np.sqrt(fan_{in})$</p>
 <p>​    <strong>如果激活函数是ReLU，由于只有大于0的部分会被激活，所以激活函数为$W=0.01*np.random.randn(fan_{in},fan_{out}) / np.sqrt(fan_{in}/2)$</strong></p>
-<h3 id="Batch-Normalization"><a href="#Batch-Normalization" class="headerlink" title="Batch Normalization"></a>Batch Normalization</h3><p>​    批量归一化通常是在全连接层和卷积层之后插入的，可以将输入数据的分布变为单位高斯函数。需要注意的是，批量归一化不仅仅是对每层网络输入数据的归一化，这里面还有一个变换重构的过程，目的是防止某层网络本身的作用是改变数据分布，这样就需要学习参数，让归一化的数据恢复到学习到的分布特征。批量归一化的优点有：<img src="/2018/03/10/cs231n1-6知识点/8.png" alt="Sigmoid"></p>
+<h2 id="Batch-Normalization"><a href="#Batch-Normalization" class="headerlink" title="Batch Normalization"></a>Batch Normalization</h2><p>​    批量归一化通常是在全连接层和卷积层之后插入的，可以将输入数据的分布变为单位高斯函数。需要注意的是，批量归一化不仅仅是对每层网络输入数据的归一化，这里面还有一个变换重构的过程，目的是防止某层网络本身的作用是改变数据分布，这样就需要学习参数，让归一化的数据恢复到学习到的分布特征。批量归一化的优点有：<img src="/2018/03/10/cs231n1-6知识点/8.png" alt="Sigmoid"></p>
 <p>（1）改善了梯度在网络中的传播；</p>
 <p>（2）允许更高的学习率；</p>
 <p>（3）减少了网络对初始化的依赖程度；</p>
@@ -747,7 +903,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
