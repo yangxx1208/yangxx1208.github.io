@@ -229,6 +229,140 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/27/配置python2双环境/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xuebin Yang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="杨学斌的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/27/配置python2双环境/" itemprop="url">ubuntu配置python2双环境+Opencv2+Tensorflow（TX1开发板）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-27T09:43:36+08:00">
+                2018-03-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="配置python2双环境"><a href="#配置python2双环境" class="headerlink" title="配置python2双环境"></a>配置python2双环境</h1><p>​    由于实验要求，需要在python2环境下运行代码，但是安装anaconda是python3环境的，在不改动原环境的情况下，可以搭建一个双环境，创建环境命令如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#新建python2.7环境</span></span><br><span class="line">conda create --name python27 python=<span class="number">2.7</span></span><br><span class="line"><span class="comment">#启动环境</span></span><br><span class="line">source activate python27</span><br><span class="line"><span class="comment">#关闭环境</span></span><br><span class="line">deactivate python27</span><br><span class="line"><span class="comment">#在python27环境中安装各种包（如numpy）</span></span><br><span class="line">conda install -n python27 numpy</span><br><span class="line"><span class="comment">#此时因为默认更新源服务器比较慢（可能是服务器架设在大陆之外），最好更换下添加比较快的更新源，命令如下</span></span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/msys2/</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</span><br><span class="line">conda config --set show_channel_urls yes</span><br></pre></td></tr></table></figure>
+<h1 id="配置Opencv2"><a href="#配置Opencv2" class="headerlink" title="配置Opencv2"></a>配置Opencv2</h1><h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一:"></a>方法一:</h2><p>​    安装Opencv的一般命令：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install --channel https://conda.anaconda.org/menpo opencv</span><br></pre></td></tr></table></figure>
+<h2 id="方法2："><a href="#方法2：" class="headerlink" title="方法2："></a>方法2：</h2><p>​    同安装python2环境一样会遇到速度慢的情况，解决办法还是换源：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>​    之后直接安装：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install opencv  <span class="comment">#</span></span><br></pre></td></tr></table></figure>
+<p>方法三：</p>
+<p>​    <a href="https://github.com/jayrambhia/Install-OpenCV" target="_blank" rel="noopener">github一键式安装脚本</a></p>
+<h1 id="Tensorflow安装"><a href="#Tensorflow安装" class="headerlink" title="Tensorflow安装"></a>Tensorflow安装</h1><p>​    Tensorflow安装在TX1开发板一直会出现问题，之后也找到一个一键式安装的github源码，确实方便。网址如下：</p>
+<p>​    <a href="https://github.com/jetsonhacks/installTensorFlowTX1" target="_blank" rel="noopener">一键式安装网址</a></p>
+<h1 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h1><p><a href="http://www.lqkweb.com/blog.php?id=1" target="_blank" rel="noopener">Anaconda更新失败解决方法</a> </p>
+<p><a href="https://blog.csdn.net/u012005313/article/details/52985203" target="_blank" rel="noopener">Opencv2安装</a></p>
+<p><a href="https://github.com/jetsonhacks/installTensorFlowTX1" target="_blank" rel="noopener">Tensorflow一键安装</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/18/cs231n10-12知识点/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1063,7 +1197,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

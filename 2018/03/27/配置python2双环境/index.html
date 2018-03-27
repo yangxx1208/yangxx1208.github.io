@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="description" content="配置python2双环境​    由于实验要求，需要在python2环境下运行代码，但是安装anaconda是python3环境的，在不改动原环境的情况下，可以搭建一个双环境，创建环境命令如下： 12345678910111213#新建python2.7环境conda create --name python27 python=2.7#启动环境source activate python27#关闭">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2018/03/09/hello-world/index.html">
+<meta property="og:title" content="ubuntu配置python2双环境+Opencv2+Tensorflow（TX1开发板）">
+<meta property="og:url" content="http://yoursite.com/2018/03/27/配置python2双环境/index.html">
 <meta property="og:site_name" content="杨学斌的博客">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="配置python2双环境​    由于实验要求，需要在python2环境下运行代码，但是安装anaconda是python3环境的，在不改动原环境的情况下，可以搭建一个双环境，创建环境命令如下： 12345678910111213#新建python2.7环境conda create --name python27 python=2.7#启动环境source activate python27#关闭">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-09T10:48:45.973Z">
+<meta property="og:updated_time" content="2018-03-27T03:00:34.711Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="ubuntu配置python2双环境+Opencv2+Tensorflow（TX1开发板）">
+<meta name="twitter:description" content="配置python2双环境​    由于实验要求，需要在python2环境下运行代码，但是安装anaconda是python3环境的，在不改动原环境的情况下，可以搭建一个双环境，创建环境命令如下： 12345678910111213#新建python2.7环境conda create --name python27 python=2.7#启动环境source activate python27#关闭">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/03/09/hello-world/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/03/27/配置python2双环境/"/>
 
 
 
 
 
-  <title>Hello World | 杨学斌的博客</title>
+  <title>ubuntu配置python2双环境+Opencv2+Tensorflow（TX1开发板） | 杨学斌的博客</title>
   
 
 
@@ -232,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/09/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/27/配置python2双环境/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Xuebin Yang">
@@ -249,7 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hello World</h1>
+          <h1 class="post-title" itemprop="name headline">ubuntu配置python2双环境+Opencv2+Tensorflow（TX1开发板）</h1>
         
 
         <div class="post-meta">
@@ -261,8 +261,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-09T18:48:45+08:00">
-                2018-03-09
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-27T09:43:36+08:00">
+                2018-03-27
               </time>
             
 
@@ -280,8 +280,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/03/09/hello-world/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/03/09/hello-world/" itemprop="commentsCount"></span>
+                <a href="/2018/03/27/配置python2双环境/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/03/27/配置python2双环境/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -314,15 +314,21 @@
       
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+        <h1 id="配置python2双环境"><a href="#配置python2双环境" class="headerlink" title="配置python2双环境"></a>配置python2双环境</h1><p>​    由于实验要求，需要在python2环境下运行代码，但是安装anaconda是python3环境的，在不改动原环境的情况下，可以搭建一个双环境，创建环境命令如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#新建python2.7环境</span></span><br><span class="line">conda create --name python27 python=<span class="number">2.7</span></span><br><span class="line"><span class="comment">#启动环境</span></span><br><span class="line">source activate python27</span><br><span class="line"><span class="comment">#关闭环境</span></span><br><span class="line">deactivate python27</span><br><span class="line"><span class="comment">#在python27环境中安装各种包（如numpy）</span></span><br><span class="line">conda install -n python27 numpy</span><br><span class="line"><span class="comment">#此时因为默认更新源服务器比较慢（可能是服务器架设在大陆之外），最好更换下添加比较快的更新源，命令如下</span></span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/msys2/</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</span><br><span class="line">conda config --set show_channel_urls yes</span><br></pre></td></tr></table></figure>
+<h1 id="配置Opencv2"><a href="#配置Opencv2" class="headerlink" title="配置Opencv2"></a>配置Opencv2</h1><h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一:"></a>方法一:</h2><p>​    安装Opencv的一般命令：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install --channel https://conda.anaconda.org/menpo opencv</span><br></pre></td></tr></table></figure>
+<h2 id="方法2："><a href="#方法2：" class="headerlink" title="方法2："></a>方法2：</h2><p>​    同安装python2环境一样会遇到速度慢的情况，解决办法还是换源：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>​    之后直接安装：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install opencv  <span class="comment">#</span></span><br></pre></td></tr></table></figure>
+<p>方法三：</p>
+<p>​    <a href="https://github.com/jayrambhia/Install-OpenCV" target="_blank" rel="noopener">github一键式安装脚本</a></p>
+<h1 id="Tensorflow安装"><a href="#Tensorflow安装" class="headerlink" title="Tensorflow安装"></a>Tensorflow安装</h1><p>​    Tensorflow安装在TX1开发板一直会出现问题，之后也找到一个一键式安装的github源码，确实方便。网址如下：</p>
+<p>​    <a href="https://github.com/jetsonhacks/installTensorFlowTX1" target="_blank" rel="noopener">一键式安装网址</a></p>
+<h1 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h1><p><a href="http://www.lqkweb.com/blog.php?id=1" target="_blank" rel="noopener">Anaconda更新失败解决方法</a> </p>
+<p><a href="https://blog.csdn.net/u012005313/article/details/52985203" target="_blank" rel="noopener">Opencv2安装</a></p>
+<p><a href="https://github.com/jetsonhacks/installTensorFlowTX1" target="_blank" rel="noopener">Tensorflow一键安装</a></p>
 
       
     </div>
@@ -347,15 +353,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/03/18/cs231n10-12知识点/" rel="next" title="cs231n10-12知识点">
+                <i class="fa fa-chevron-left"></i> cs231n10-12知识点
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/03/10/sublime-text3的使用python版/" rel="prev" title="sublime text3的使用（python版）">
-                sublime text3的使用（python版） <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -476,7 +482,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#配置python2双环境"><span class="nav-number">1.</span> <span class="nav-text">配置python2双环境</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置Opencv2"><span class="nav-number">2.</span> <span class="nav-text">配置Opencv2</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#方法一"><span class="nav-number">2.1.</span> <span class="nav-text">方法一:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法2："><span class="nav-number">2.2.</span> <span class="nav-text">方法2：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Tensorflow安装"><span class="nav-number">3.</span> <span class="nav-text">Tensorflow安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考："><span class="nav-number">4.</span> <span class="nav-text">参考：</span></a></li></ol></div>
             
 
           </div>
