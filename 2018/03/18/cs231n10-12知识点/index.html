@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="[TOC] Lecture10 Recurrent Neural NetworksCNN和RNN区别​    相较于卷积神经网络需要固定长度的输入和输出，循环神经网络可以是不定长的输入或输出。 RNN一般使用情景​    如下图：第一幅图是普通的卷积网络，剩下的都是循环神经网络。  one to many: 适用于给图片加标题，加描述 many to one: 适用于对文字情感分类 many to">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cs231n10-12知识点">
+<meta property="og:url" content="http://yoursite.com/2018/03/18/cs231n10-12知识点/index.html">
+<meta property="og:site_name" content="杨学斌的博客">
+<meta property="og:description" content="[TOC] Lecture10 Recurrent Neural NetworksCNN和RNN区别​    相较于卷积神经网络需要固定长度的输入和输出，循环神经网络可以是不定长的输入或输出。 RNN一般使用情景​    如下图：第一幅图是普通的卷积网络，剩下的都是循环神经网络。  one to many: 适用于给图片加标题，加描述 many to one: 适用于对文字情感分类 many to">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/03/18/cs231n10-12知识点/1.PNG">
+<meta property="og:image" content="http://yoursite.com/2018/03/18/cs231n10-12知识点/2.PNG">
+<meta property="og:image" content="http://yoursite.com/2018/03/18/cs231n10-12知识点/3.PNG">
+<meta property="og:image" content="http://yoursite.com/2018/03/18/cs231n10-12知识点/4.PNG">
+<meta property="og:image" content="http://yoursite.com/2018/03/18/cs231n10-12知识点/5.PNG">
+<meta property="og:image" content="http://yoursite.com/2018/03/18/cs231n10-12知识点/6.PNG">
+<meta property="og:image" content="http://yoursite.com/2018/03/18/cs231n10-12知识点/6.PNG">
+<meta property="og:image" content="http://yoursite.com/2018/03/18/cs231n10-12知识点/8.PNG">
+<meta property="og:image" content="http://yoursite.com/2018/03/18/cs231n10-12知识点/9.PNG">
+<meta property="og:image" content="http://yoursite.com/2018/03/18/cs231n10-12知识点/10.PNG">
+<meta property="og:image" content="http://yoursite.com/2018/03/18/cs231n10-12知识点/11.PNG">
+<meta property="og:image" content="http://yoursite.com/2018/03/18/cs231n10-12知识点/12.PNG">
+<meta property="og:image" content="http://yoursite.com/2018/03/18/cs231n10-12知识点/13.PNG">
+<meta property="og:image" content="http://yoursite.com/2018/03/18/cs231n10-12知识点/14.PNG">
+<meta property="og:updated_time" content="2018-03-20T10:29:31.133Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="cs231n10-12知识点">
+<meta name="twitter:description" content="[TOC] Lecture10 Recurrent Neural NetworksCNN和RNN区别​    相较于卷积神经网络需要固定长度的输入和输出，循环神经网络可以是不定长的输入或输出。 RNN一般使用情景​    如下图：第一幅图是普通的卷积网络，剩下的都是循环神经网络。  one to many: 适用于给图片加标题，加描述 many to one: 适用于对文字情感分类 many to">
+<meta name="twitter:image" content="http://yoursite.com/2018/03/18/cs231n10-12知识点/1.PNG">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/03/18/cs231n10-12知识点/"/>
+
+
+
+
+
+  <title>cs231n10-12知识点 | 杨学斌的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">杨学斌的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/18/cs231n10-12知识点/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xuebin Yang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="杨学斌的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">cs231n10-12知识点</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-18T10:03:29+08:00">
+                2018-03-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/03/18/cs231n10-12知识点/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/03/18/cs231n10-12知识点/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>[TOC]</p>
+<h1 id="Lecture10-Recurrent-Neural-Networks"><a href="#Lecture10-Recurrent-Neural-Networks" class="headerlink" title="Lecture10 Recurrent Neural Networks"></a>Lecture10 Recurrent Neural Networks</h1><h2 id="CNN和RNN区别"><a href="#CNN和RNN区别" class="headerlink" title="CNN和RNN区别"></a>CNN和RNN区别</h2><p>​    相较于卷积神经网络需要固定长度的输入和输出，循环神经网络可以是不定长的输入或输出。</p>
+<h2 id="RNN一般使用情景"><a href="#RNN一般使用情景" class="headerlink" title="RNN一般使用情景"></a>RNN一般使用情景</h2><p>​    如下图：第一幅图是普通的卷积网络，剩下的都是循环神经网络。</p>
+<ul>
+<li>one to many: 适用于给图片加标题，加描述</li>
+<li>many to one: 适用于对文字情感分类</li>
+<li>many to many（有延迟）: 适用于机器翻译</li>
+<li>many to many（无延迟）: 对帧图片分类</li>
+</ul>
+<p><img src="/2018/03/18/cs231n10-12知识点/1.PNG" alt=""></p>
+<h2 id="RNN结构"><a href="#RNN结构" class="headerlink" title="RNN结构"></a>RNN结构</h2><p>​    此为RNN单层结构，每个时刻函数f接收上一时刻的隐藏态$h_{t-1}$和当前时刻的输入$x_t$，产生当前时刻的隐藏态$h_t$。其中函数f是关于参数w的函数，在每个时刻参数w和函数f都应该是相同的。输出y可以由当前的隐藏态产生。</p>
+<p>​    RNN不定期会有输入，每次输入都会引起权值改变，每一层的权值共享。</p>
+<p><img src="/2018/03/18/cs231n10-12知识点/2.PNG" alt=""></p>
+<p>RNN展开图：</p>
+<p><img src="/2018/03/18/cs231n10-12知识点/3.PNG" alt=""></p>
+<h2 id="RNN实例：Image-Captioning-with-Attention"><a href="#RNN实例：Image-Captioning-with-Attention" class="headerlink" title="RNN实例：Image Captioning with Attention"></a>RNN实例：Image Captioning with Attention</h2><p>​    图片经过CNN会产生一个L x D的网格向量，代表图像L个不同区域的D维特征向量的整合。网格向量放入RNN中，第一层会产生一个位置的分布，确定下一层网络需要关注图像的位置信息，即下一层网络需要注意的D维向量。之后的每一层都会产生一个关于图像位置的信息分布，除此之外，还会生成一个词汇的分布用来确定输出的单词。</p>
+<p><img src="/2018/03/18/cs231n10-12知识点/4.PNG" alt=""></p>
+<h2 id="Vanilla-RNN-Gradient-Flow梯度爆炸、消失"><a href="#Vanilla-RNN-Gradient-Flow梯度爆炸、消失" class="headerlink" title="Vanilla RNN Gradient Flow梯度爆炸、消失"></a>Vanilla RNN Gradient Flow梯度爆炸、消失</h2><p>​    如下图：对$h_0$求梯度时，由于每个RNN状态都会产生对$h_0$的梯度，如$h_4$要经过4个乘法门（对权值矩阵W的因子求积），才能得到其对$h_0$的梯度。所以在W的最大奇异值大于0的情况下，会产生梯度爆照；在W最小奇异值小于0的情况下，会产生梯度消失的现象。</p>
+<p><img src="/2018/03/18/cs231n10-12知识点/5.PNG" alt=""></p>
+<h2 id="LSTM：解决梯度爆炸、消失"><a href="#LSTM：解决梯度爆炸、消失" class="headerlink" title="LSTM：解决梯度爆炸、消失"></a>LSTM：解决梯度爆炸、消失</h2><p><img src="/2018/03/18/cs231n10-12知识点/6.PNG" alt=""></p>
+<p>​    上图是LSTM的结构图，相较于传统的RNN，LSTM多了细胞状态$c_t$，类似于残差网络梯度的“高速公路”。</p>
+<p>​    其中i，f，o，g分别称为输入门，遗忘门，输出门，门之门。每次$c_t$更新时，都要经过遗忘和写入两个阶段。遗忘阶段$c_{t-1}$会与f逐元素相乘，选择性的丢弃一些信息，f中为1的元素对应的$c_{t-1}$信息得以完全保留，为0的元素对应的$c_{t-1}$信息会被完全丢弃。然后，i与g逐元素相乘，表示有多少新的信息要写入到细胞状态中。之后更新$c_t$。更新后的$c_t$对下一时刻隐藏态$h_t$的影响是通过o来控制的。</p>
+<h2 id="LSTM梯度传播："><a href="#LSTM梯度传播：" class="headerlink" title="LSTM梯度传播："></a>LSTM梯度传播：</h2><p><img src="/2018/03/18/cs231n10-12知识点/6.PNG" alt=""></p>
+<p>​    虽然流经h的梯度流仍然会很大程度衰减，但由于细胞状态C的引入，形成了一条流经C的额外的梯度高速公路。在流经C的路线上，梯度经过加法门是无损的，经过乘法门时，需要逐元素乘以一个f。相比于传统RNN，这里的情况好了很多，因为f在不同的单元中都是不同的，一般不会出现都小于1的情况，此外，逐元素相乘也比矩阵相乘好得多。这样就使得梯度传播到低时间步单元时仍然不衰减，模型能够联系时间上相隔很远的序列信息来进行学习，克服上面提到的长期依赖的问题。（部分博客内容参考<a href="http://www.cnblogs.com/coldyan/p/8385021.html" target="_blank" rel="noopener">coldyan</a>）</p>
+<h1 id="Lecture11-Detection-and-Segmentation"><a href="#Lecture11-Detection-and-Segmentation" class="headerlink" title="Lecture11 Detection and  Segmentation"></a>Lecture11 Detection and  Segmentation</h1><p>​    课程11主要就卷积神经网络的应用进行概要式讲解，里面涉及到语义分割、物体定位、物体检测和物体分割。</p>
+<h2 id="语义分割"><a href="#语义分割" class="headerlink" title="语义分割"></a>语义分割</h2><h3 id="传统框架"><a href="#传统框架" class="headerlink" title="传统框架"></a>传统框架</h3><p><img src="/2018/03/18/cs231n10-12知识点/8.PNG" alt=""></p>
+<p>​    待处理图片会经过多个卷积层处理，最终输出的维度是C x H x W，C表示类别个数，表示每个像素在不同类别上的得分。最终取最大得分为预测类别。梯度则需要将结果与训练集的标签求交叉熵，得到损失函数，然后反向传播学习参数。</p>
+<p>缺点：模型的中间层将保留了图像的大小，非常占内存。</p>
+<h3 id="改进后框架"><a href="#改进后框架" class="headerlink" title="改进后框架"></a>改进后框架</h3><p>改进：对图片先进行欠采样，然后再过采样恢复原图片大小。</p>
+<p><img src="/2018/03/18/cs231n10-12知识点/9.PNG" alt=""></p>
+<h3 id="过采样方法："><a href="#过采样方法：" class="headerlink" title="过采样方法："></a>过采样方法：</h3><h4 id="去池化"><a href="#去池化" class="headerlink" title="去池化"></a>去池化</h4><p><img src="/2018/03/18/cs231n10-12知识点/10.PNG" alt=""></p>
+<p><img src="/2018/03/18/cs231n10-12知识点/11.PNG" alt=""></p>
+<h4 id="转置卷积"><a href="#转置卷积" class="headerlink" title="转置卷积"></a>转置卷积</h4><p><img src="/2018/03/18/cs231n10-12知识点/12.PNG" alt=""></p>
+<p>​    转置卷积是一种可学习的过采样方法。具体步骤是，将输入的每个值作为权重，对滤波器进行加权，然后各个加权的滤波器按照步长拼成输出，重叠部分相加。类似图像卷积过程的反向操作。</p>
+<h1 id="分类、定位"><a href="#分类、定位" class="headerlink" title="分类、定位"></a>分类、定位</h1><p><img src="/2018/03/18/cs231n10-12知识点/13.PNG" alt=""></p>
+<p>​    这个模型主要注意损失函数的设置。</p>
+<h1 id="物体检测"><a href="#物体检测" class="headerlink" title="物体检测"></a>物体检测</h1><p>​    这一块算法很多，现在主要流行的是faster-RCNN、Yolo和SSD，具体就不说明了，太熟了= =。</p>
+<h1 id="物体分割"><a href="#物体分割" class="headerlink" title="物体分割"></a>物体分割</h1><p><img src="/2018/03/18/cs231n10-12知识点/14.PNG" alt=""></p>
+<p>​    Mask RCNN是当将faster RCNN和语义分割结合成一个框架，首先将图像使用CNN处理为特征，然后经过一个RPN网络生成候选区域，投射到之前的feature map。到这里与faster RCNN一样。之后有两个分支，一个分支与faster RCNN相同，预测候选框的分类和边界值，另一个分支则与语义分割相似，为每个像素做分类。</p>
+<h1 id="Lecture12-Visualizing-and-Understanding"><a href="#Lecture12-Visualizing-and-Understanding" class="headerlink" title="Lecture12 Visualizing and Understanding"></a>Lecture12 Visualizing and Understanding</h1><h2 id="可视化卷积"><a href="#可视化卷积" class="headerlink" title="可视化卷积"></a>可视化卷积</h2><h3 id="原因："><a href="#原因：" class="headerlink" title="原因："></a>原因：</h3><p>​    从卷积可视化知晓卷积核在寻找什么。</p>
+<h2 id="t-SNE"><a href="#t-SNE" class="headerlink" title="t_SNE"></a>t_SNE</h2><p>​    可视化特征的非线性降维方法。<a href="http://cs.stanford.edu/people/karpathy/cnnembed/" target="_blank" rel="noopener">t_SNE特征可视化</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/12/cs231n7-9知识点/" rel="next" title="cs231n7-9知识点">
+                <i class="fa fa-chevron-left"></i> cs231n7-9知识点
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Xuebin Yang</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Lecture10-Recurrent-Neural-Networks"><span class="nav-number">1.</span> <span class="nav-text">Lecture10 Recurrent Neural Networks</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CNN和RNN区别"><span class="nav-number">1.1.</span> <span class="nav-text">CNN和RNN区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RNN一般使用情景"><span class="nav-number">1.2.</span> <span class="nav-text">RNN一般使用情景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RNN结构"><span class="nav-number">1.3.</span> <span class="nav-text">RNN结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RNN实例：Image-Captioning-with-Attention"><span class="nav-number">1.4.</span> <span class="nav-text">RNN实例：Image Captioning with Attention</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vanilla-RNN-Gradient-Flow梯度爆炸、消失"><span class="nav-number">1.5.</span> <span class="nav-text">Vanilla RNN Gradient Flow梯度爆炸、消失</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LSTM：解决梯度爆炸、消失"><span class="nav-number">1.6.</span> <span class="nav-text">LSTM：解决梯度爆炸、消失</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LSTM梯度传播："><span class="nav-number">1.7.</span> <span class="nav-text">LSTM梯度传播：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lecture11-Detection-and-Segmentation"><span class="nav-number">2.</span> <span class="nav-text">Lecture11 Detection and  Segmentation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#语义分割"><span class="nav-number">2.1.</span> <span class="nav-text">语义分割</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#传统框架"><span class="nav-number">2.1.1.</span> <span class="nav-text">传统框架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#改进后框架"><span class="nav-number">2.1.2.</span> <span class="nav-text">改进后框架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#过采样方法："><span class="nav-number">2.1.3.</span> <span class="nav-text">过采样方法：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#去池化"><span class="nav-number">2.1.3.1.</span> <span class="nav-text">去池化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#转置卷积"><span class="nav-number">2.1.3.2.</span> <span class="nav-text">转置卷积</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分类、定位"><span class="nav-number">3.</span> <span class="nav-text">分类、定位</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#物体检测"><span class="nav-number">4.</span> <span class="nav-text">物体检测</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#物体分割"><span class="nav-number">5.</span> <span class="nav-text">物体分割</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lecture12-Visualizing-and-Understanding"><span class="nav-number">6.</span> <span class="nav-text">Lecture12 Visualizing and Understanding</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#可视化卷积"><span class="nav-number">6.1.</span> <span class="nav-text">可视化卷积</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#原因："><span class="nav-number">6.1.1.</span> <span class="nav-text">原因：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#t-SNE"><span class="nav-number">6.2.</span> <span class="nav-text">t_SNE</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xuebin Yang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'yangxx1208',
+            repo: 'yangxx1208.github.io',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'dbf224b276ddf73768bdcaa9a32dd2dfb76fbf87',
+            
+                client_id: '255d271f2f4e0f870265'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
