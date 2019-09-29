@@ -99,7 +99,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/03/12/cs231n7-9知识点/11.png">
 <meta property="og:image" content="http://yoursite.com/2018/03/12/cs231n7-9知识点/12.png">
 <meta property="og:image" content="http://yoursite.com/2018/03/12/cs231n7-9知识点/13.png">
-<meta property="og:updated_time" content="2018-03-16T04:53:06.000Z">
+<meta property="og:updated_time" content="2019-09-29T13:31:50.549Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="cs231n7-9知识点">
 <meta name="twitter:description" content="[TOC] Lecture7 Training Neural Networks, Part2梯度优化方法SGD（随机梯度下降）缺点： （1）容易在梯度大的方向做“之”型移动，在不敏感的梯度方向缓慢移动； （2）容易陷入局部极小值和鞍点中（局部极小值在网络结构小时表现严重，鞍点在网络结构大时表现严重）； （3）对噪声比较敏感（现实中，数据存在噪声不可避免） SGD+Momentum ​    增加动">
@@ -779,6 +779,28 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
 
