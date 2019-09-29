@@ -337,6 +337,7 @@
 <h1 id="lecture3-Loss-Functions-and-Optimization"><a href="#lecture3-Loss-Functions-and-Optimization" class="headerlink" title="lecture3 Loss Functions and Optimization"></a>lecture3 Loss Functions and Optimization</h1><p>​    课程三主要讲损失函数和优化问题。</p>
 <h2 id="Hinge-loss"><a href="#Hinge-loss" class="headerlink" title="Hinge  loss"></a>Hinge  loss</h2><p><img src="/2018/03/10/cs231n1-6知识点/1.png" alt="Hinge loss"></p>
 <p>​    hinge loss是一种可以用来求解间隔最大化的问题，典型的就是SVM问题的求解。简单来说对于一个测试样例，其正确分类类别为$a_i$，预测结果为$[a_1,a_2,…,a_i,…a_n]$，分类器对其预测带来的损失是：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -351,6 +352,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>代码：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">L_i_vectorized</span><span class="params">(x,y,W)</span>:</span></span><br><span class="line">  scores = W.dot(x)</span><br><span class="line">  margins = np.maximum(<span class="number">0</span>, scores - scores[y] + <span class="number">1</span>)</span><br><span class="line">  margins[y] = <span class="number">0</span></span><br><span class="line">  loss_i = np.sum(margins)</span><br><span class="line">  <span class="keyword">return</span> loss_i</span><br></pre></td></tr></table></figure>
 <h2 id="Softmax-Classifier"><a href="#Softmax-Classifier" class="headerlink" title="Softmax Classifier"></a>Softmax Classifier</h2><p><img src="/2018/03/10/cs231n1-6知识点/2.png" alt="Hinge loss"></p>
