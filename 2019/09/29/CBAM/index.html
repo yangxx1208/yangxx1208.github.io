@@ -86,14 +86,14 @@
 <meta property="og:site_name" content="杨学斌的博客">
 <meta property="og:description" content="CBAM​    CBAM（Convolutional Block Attention Module）也是一种运用attention机制嵌入到卷积神经网络的模块，不同于SENET，CBAM不仅考虑了通道维（channel）的注意力机制，还结合了空间维（Spatial），也取得了更好的结果。原文地址：https://arxiv.org/pdf/1807.06521.pdf 原理​    SENET是">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2019/09/29/CBAM/picture/1569745452934-1569764526477.png">
-<meta property="og:image" content="http://yoursite.com/2019/09/29/CBAM/picture/1569745869898-1569764526477.png">
-<meta property="og:image" content="http://yoursite.com/2019/09/29/CBAM/picture/1569747737199-1569764526478.png">
-<meta property="og:updated_time" content="2019-09-29T13:42:08.077Z">
+<meta property="og:image" content="http://yoursite.com/2019/09/29/CBAM/1569745452934-1569764526477.png">
+<meta property="og:image" content="http://yoursite.com/2019/09/29/CBAM/1569745869898-1569764526477.png">
+<meta property="og:image" content="http://yoursite.com/2019/09/29/CBAM/1569747737199-1569764526478.png">
+<meta property="og:updated_time" content="2019-09-29T13:52:48.718Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CBAM">
 <meta name="twitter:description" content="CBAM​    CBAM（Convolutional Block Attention Module）也是一种运用attention机制嵌入到卷积神经网络的模块，不同于SENET，CBAM不仅考虑了通道维（channel）的注意力机制，还结合了空间维（Spatial），也取得了更好的结果。原文地址：https://arxiv.org/pdf/1807.06521.pdf 原理​    SENET是">
-<meta name="twitter:image" content="http://yoursite.com/2019/09/29/CBAM/picture/1569745452934-1569764526477.png">
+<meta name="twitter:image" content="http://yoursite.com/2019/09/29/CBAM/1569745452934-1569764526477.png">
 
 
 
@@ -320,12 +320,12 @@
       
         <h1 id="CBAM"><a href="#CBAM" class="headerlink" title="CBAM"></a>CBAM</h1><p>​    CBAM（Convolutional Block Attention Module）也是一种运用attention机制嵌入到卷积神经网络的模块，不同于SENET，CBAM不仅考虑了通道维（channel）的注意力机制，还结合了空间维（Spatial），也取得了更好的结果。原文地址：<a href="https://arxiv.org/pdf/1807.06521.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1807.06521.pdf</a></p>
 <h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>​    SENET是根据现有学习到的特征来重新校准各个通道特征的重要程度，以此类推，CBAM就是在SENET的基础上做了扩展，增加了对空间维（$H \times W$）的注意力机制，通道维的注意力机制是为了降低信息量较少通道的影响，空间维的注意力机制则是降低某个位置上对结果的影响，用作者的话就是对特征进行精炼。</p>
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p><img src="/2019/09/29/CBAM/picture/1569745452934-1569764526477.png" alt="1569745452934"></p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p><img src="/2019/09/29/CBAM/1569745452934-1569764526477.png" alt="1569745452934"></p>
 <p>​    如上图所示，CBAM共有连个子模块，通道模块（Channel Attention Module）和空间模块（Spatial Attention Module）。</p>
 <h3 id="通道模块"><a href="#通道模块" class="headerlink" title="通道模块"></a>通道模块</h3><p>​    通道模块注重于什么（<strong>what</strong>）特征对task更有用。输入特征（Input Feature）首先会经过通道模块，这里的通道模块与SENET很相像，但是相比于SENET，通道模块除了使用全局平均池化外，还增加了全局最大池化，如下图所示：</p>
-<p><img src="/2019/09/29/CBAM/picture/1569745869898-1569764526477.png" alt="1569745869898"></p>
+<p><img src="/2019/09/29/CBAM/1569745869898-1569764526477.png" alt="1569745869898"></p>
 <p>​    全局平均池化和全局最大池化各生成一个$1 \times 1\times C$的向量，在经过多层感知机后，对两个向量进行相加，并取Sigmod函数转化后的结果，作为该模块的输出。 作者在多层感知机中也用到了和SENET类似的降/升维的操作，用来<strong>减少参数量</strong>；</p>
-<h3 id="空间模块"><a href="#空间模块" class="headerlink" title="空间模块"></a>空间模块</h3><p><img src="/2019/09/29/CBAM/picture/1569747737199-1569764526478.png" alt="1569747737199"></p>
+<h3 id="空间模块"><a href="#空间模块" class="headerlink" title="空间模块"></a>空间模块</h3><p><img src="/2019/09/29/CBAM/1569747737199-1569764526478.png" alt="1569747737199"></p>
 <p>​    空间模块主要利用特征的空间关系，不同于通道模块，空间模块更注重哪儿(<strong>where</strong>)的特征更重要。空间模块的输入是经过通道模块精炼后的特征记为$F’$，与通道模块类似，$F’$也会经过平均池化和最大池化，只不过是在通道维进行池化，生成的是$H \times W\times 1$的特征向量，池化后将两个向量进行通道维度上的拼接，再使用$7 \times 7$卷积层生成$H \times W\times 1$的特征向量,经过Sigmod操作后，得到Spatial Attention。</p>
 <h2 id="Tricks"><a href="#Tricks" class="headerlink" title="Tricks"></a>Tricks</h2><p>​    通道模块和空间模块可以并行，可以顺序；从作者实验结果来看顺序的要好些，且通道模块先进行的最优。</p>
 
