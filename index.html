@@ -229,135 +229,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/29/MobileNet/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Xuebin Yang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="杨学斌的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/29/MobileNet/" itemprop="url">未命名</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-29T19:41:57+08:00">
-                2019-09-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="SENET"><a href="#SENET" class="headerlink" title="SENET"></a>SENET</h1><p>​    SENET（Squeeze-and-Excitation net）是Imagenet2017的冠军模型，SE其实是可以嵌入到任何网络的模块，任何包含SE模块的网络都可以称之为SENET。原文地址：<a href="https://arxiv.org/pdf/1709.01507.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1709.01507.pdf</a></p>
-<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>​    从原理上来讲，SE模块的作用根据现有学习到的特征来重新校准各个通道特征的重要程度，从而加强特征对当前任务的表示能力。</p>
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p><img src="/2019/09/29/MobileNet/picture/1569735299623.png" alt="1569735299623"></p>
-<p>​    如上图所示，给定输入X后，首先输入$X$会先进入一个特征抽取网络,即$F_{tr}$，得到feature map记为$U$，$U$在$H\times W$方向上进行<strong>压缩</strong>(Squeeze；原文使用的是<strong>全局平均池化</strong>)，从而形成一个通道维（$1\times 1\times C$）的全局嵌入，记为$W$。在压缩操作之后就是<strong>激励</strong>(Excitation)，原文中作者叙述激励的<strong>目的</strong>是<strong>捕获通道维的依赖关系</strong>，同时为了实现该目标，该操作需要满足两个条件，<strong>一个是具有灵活的学习能力，能够学习通道之间的依赖关系，第二个是学习的结果可以是非互斥的，即不是非此即彼的one-hot向量</strong>，满足第一个条件，需要用到全连接层，第二个条件则需要映入激活函数，原文的方法是使用两个全连接层，执行先降维再升维的操作，中间加上Relu函数增加非线性性，如下图所示是SE模块再、应用到Inception和ResNet网络的模型结构图。</p>
-<p><img src="/2019/09/29/MobileNet/picture/1569743420907.png" alt="1569743420907"></p>
-<p>这样做，比直接使用全连接层的的<strong>好处</strong>有：</p>
-<ol>
-<li>具有更多的非线性（sigmod，降维/升维），更好拟合通道间的依赖关系；</li>
-<li>减少参数量（降维/升维）；</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/29/CBAM/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -377,7 +248,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/09/29/CBAM/" itemprop="url">未命名</a></h1>
+                <a class="post-title-link" href="/2019/09/29/CBAM/" itemprop="url">CBAM</a></h1>
         
 
         <div class="post-meta">
@@ -389,7 +260,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-29T16:14:03+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-29T21:40:17+08:00">
                 2019-09-29
               </time>
             
@@ -431,12 +302,12 @@
           
             <h1 id="CBAM"><a href="#CBAM" class="headerlink" title="CBAM"></a>CBAM</h1><p>​    CBAM（Convolutional Block Attention Module）也是一种运用attention机制嵌入到卷积神经网络的模块，不同于SENET，CBAM不仅考虑了通道维（channel）的注意力机制，还结合了空间维（Spatial），也取得了更好的结果。原文地址：<a href="https://arxiv.org/pdf/1807.06521.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1807.06521.pdf</a></p>
 <h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>​    SENET是根据现有学习到的特征来重新校准各个通道特征的重要程度，以此类推，CBAM就是在SENET的基础上做了扩展，增加了对空间维（$H \times W$）的注意力机制，通道维的注意力机制是为了降低信息量较少通道的影响，空间维的注意力机制则是降低某个位置上对结果的影响，用作者的话就是对特征进行精炼。</p>
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p><img src="/2019/09/29/CBAM/picture/1569745452934.png" alt="1569745452934"></p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p><img src="/2019/09/29/CBAM/picture/1569745452934-1569764526477.png" alt="1569745452934"></p>
 <p>​    如上图所示，CBAM共有连个子模块，通道模块（Channel Attention Module）和空间模块（Spatial Attention Module）。</p>
 <h3 id="通道模块"><a href="#通道模块" class="headerlink" title="通道模块"></a>通道模块</h3><p>​    通道模块注重于什么（<strong>what</strong>）特征对task更有用。输入特征（Input Feature）首先会经过通道模块，这里的通道模块与SENET很相像，但是相比于SENET，通道模块除了使用全局平均池化外，还增加了全局最大池化，如下图所示：</p>
-<p><img src="/2019/09/29/CBAM/picture/1569745869898.png" alt="1569745869898"></p>
+<p><img src="/2019/09/29/CBAM/picture/1569745869898-1569764526477.png" alt="1569745869898"></p>
 <p>​    全局平均池化和全局最大池化各生成一个$1 \times 1\times C$的向量，在经过多层感知机后，对两个向量进行相加，并取Sigmod函数转化后的结果，作为该模块的输出。 作者在多层感知机中也用到了和SENET类似的降/升维的操作，用来<strong>减少参数量</strong>；</p>
-<h3 id="空间模块"><a href="#空间模块" class="headerlink" title="空间模块"></a>空间模块</h3><p><img src="/2019/09/29/CBAM/picture/1569747737199.png" alt="1569747737199"></p>
+<h3 id="空间模块"><a href="#空间模块" class="headerlink" title="空间模块"></a>空间模块</h3><p><img src="/2019/09/29/CBAM/picture/1569747737199-1569764526478.png" alt="1569747737199"></p>
 <p>​    空间模块主要利用特征的空间关系，不同于通道模块，空间模块更注重哪儿(<strong>where</strong>)的特征更重要。空间模块的输入是经过通道模块精炼后的特征记为$F’$，与通道模块类似，$F’$也会经过平均池化和最大池化，只不过是在通道维进行池化，生成的是$H \times W\times 1$的特征向量，池化后将两个向量进行通道维度上的拼接，再使用$7 \times 7$卷积层生成$H \times W\times 1$的特征向量,经过Sigmod操作后，得到Spatial Attention。</p>
 <h2 id="Tricks"><a href="#Tricks" class="headerlink" title="Tricks"></a>Tricks</h2><p>​    通道模块和空间模块可以并行，可以顺序；从作者实验结果来看顺序的要好些，且通道模块先进行的最优。</p>
 
@@ -506,7 +377,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/09/29/SENET/" itemprop="url">未命名</a></h1>
+                <a class="post-title-link" href="/2019/09/29/SENET/" itemprop="url">SENET</a></h1>
         
 
         <div class="post-meta">
@@ -518,7 +389,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-29T09:41:01+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-29T21:39:58+08:00">
                 2019-09-29
               </time>
             
@@ -1459,7 +1330,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
