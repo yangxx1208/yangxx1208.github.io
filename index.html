@@ -431,9 +431,9 @@
           
             <h1 id="SENET"><a href="#SENET" class="headerlink" title="SENET"></a>SENET</h1><p>​    SENET（Squeeze-and-Excitation net）是Imagenet2017的冠军模型，SE其实是可以嵌入到任何网络的模块，任何包含SE模块的网络都可以称之为SENET。原文地址：<a href="https://arxiv.org/pdf/1709.01507.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1709.01507.pdf</a></p>
 <h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>​    从原理上来讲，SE模块的作用根据现有学习到的特征来重新校准各个通道特征的重要程度，从而加强特征对当前任务的表示能力。</p>
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p><img src="/2019/09/29/SENET/picture/1569735299623.png" alt="1569735299623"></p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p><img src="/2019/09/29/SENET/1569735299623.png" alt="1569735299623"></p>
 <p>​    如上图所示，给定输入X后，首先输入$X$会先进入一个特征抽取网络,即$F_{tr}$，得到feature map记为$U$，$U$在$H\times W$方向上进行<strong>压缩</strong>(Squeeze；原文使用的是<strong>全局平均池化</strong>)，从而形成一个通道维（$1\times 1\times C$）的全局嵌入，记为$W$。在压缩操作之后就是<strong>激励</strong>(Excitation)，原文中作者叙述激励的<strong>目的</strong>是<strong>捕获通道维的依赖关系</strong>，同时为了实现该目标，该操作需要满足两个条件，<strong>一个是具有灵活的学习能力，能够学习通道之间的依赖关系，第二个是学习的结果可以是非互斥的，即不是非此即彼的one-hot向量</strong>，满足第一个条件，需要用到全连接层，第二个条件则需要映入激活函数，原文的方法是使用两个全连接层，执行先降维再升维的操作，中间加上Relu函数增加非线性性，如下图所示是SE模块再、应用到Inception和ResNet网络的模型结构图。</p>
-<p><img src="/2019/09/29/SENET/picture/1569743420907.png" alt="1569743420907"></p>
+<p><img src="/2019/09/29/SENET/1569743420907.png" alt="1569743420907"></p>
 <p>这样做，比直接使用全连接层的的<strong>好处</strong>有：</p>
 <ol>
 <li>具有更多的非线性（sigmod，降维/升维），更好拟合通道间的依赖关系；</li>
