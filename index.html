@@ -278,6 +278,17 @@
 
           
           
+             <span id="/2019/09/29/CBAM/" class="leancloud_visitors" data-flag-title="CBAM">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
 
           
 
@@ -300,18 +311,15 @@
       
         
           
-            <h1 id="CBAM"><a href="#CBAM" class="headerlink" title="CBAM"></a>CBAM</h1><p>​    CBAM（Convolutional Block Attention Module）也是一种运用attention机制嵌入到卷积神经网络的模块，不同于SENET，CBAM不仅考虑了通道维（channel）的注意力机制，还结合了空间维（Spatial），也取得了更好的结果。原文地址：<a href="https://arxiv.org/pdf/1807.06521.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1807.06521.pdf</a></p>
-<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>​    SENET是根据现有学习到的特征来重新校准各个通道特征的重要程度，以此类推，CBAM就是在SENET的基础上做了扩展，增加了对空间维（$H \times W$）的注意力机制，通道维的注意力机制是为了降低信息量较少通道的影响，空间维的注意力机制则是降低某个位置上对结果的影响，用作者的话就是对特征进行精炼。</p>
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p><img src="/2019/09/29/CBAM/1569745452934-1569764526477.png" alt="1569745452934"></p>
-<p>​    如上图所示，CBAM共有连个子模块，通道模块（Channel Attention Module）和空间模块（Spatial Attention Module）。</p>
-<h3 id="通道模块"><a href="#通道模块" class="headerlink" title="通道模块"></a>通道模块</h3><p>​    通道模块注重于什么（<strong>what</strong>）特征对task更有用。输入特征（Input Feature）首先会经过通道模块，这里的通道模块与SENET很相像，但是相比于SENET，通道模块除了使用全局平均池化外，还增加了全局最大池化，如下图所示：</p>
-<p><img src="/2019/09/29/CBAM/1569745869898-1569764526477.png" alt="1569745869898"></p>
-<p>​    全局平均池化和全局最大池化各生成一个$1 \times 1\times C$的向量，在经过多层感知机后，对两个向量进行相加，并取Sigmod函数转化后的结果，作为该模块的输出。 作者在多层感知机中也用到了和SENET类似的降/升维的操作，用来<strong>减少参数量</strong>；</p>
-<h3 id="空间模块"><a href="#空间模块" class="headerlink" title="空间模块"></a>空间模块</h3><p><img src="/2019/09/29/CBAM/1569747737199-1569764526478.png" alt="1569747737199"></p>
-<p>​    空间模块主要利用特征的空间关系，不同于通道模块，空间模块更注重哪儿(<strong>where</strong>)的特征更重要。空间模块的输入是经过通道模块精炼后的特征记为$F’$，与通道模块类似，$F’$也会经过平均池化和最大池化，只不过是在通道维进行池化，生成的是$H \times W\times 1$的特征向量，池化后将两个向量进行通道维度上的拼接，再使用$7 \times 7$卷积层生成$H \times W\times 1$的特征向量,经过Sigmod操作后，得到Spatial Attention。</p>
-<h2 id="Tricks"><a href="#Tricks" class="headerlink" title="Tricks"></a>Tricks</h2><p>​    通道模块和空间模块可以并行，可以顺序；从作者实验结果来看顺序的要好些，且通道模块先进行的最优。</p>
-
-          
+          CBAM​    CBAM（Convolutional Block Attention Module）也是一种运用attention机制嵌入到卷积神经网络的模块，不同于SENET，CBAM不仅考虑了通道维（channel）的注意力机制，还结合了空间维（Spatial），也取得了更好的结果。原文地址：
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/09/29/CBAM/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -407,6 +415,17 @@
 
           
           
+             <span id="/2019/09/29/SENET/" class="leancloud_visitors" data-flag-title="SENET">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
 
           
 
@@ -429,18 +448,16 @@
       
         
           
-            <h1 id="SENET"><a href="#SENET" class="headerlink" title="SENET"></a>SENET</h1><p>​    SENET（Squeeze-and-Excitation net）是Imagenet2017的冠军模型，SE其实是可以嵌入到任何网络的模块，任何包含SE模块的网络都可以称之为SENET。原文地址：<a href="https://arxiv.org/pdf/1709.01507.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1709.01507.pdf</a></p>
-<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>​    从原理上来讲，SE模块的作用根据现有学习到的特征来重新校准各个通道特征的重要程度，从而加强特征对当前任务的表示能力。</p>
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p><img src="/2019/09/29/SENET/1569735299623.png" alt="1569735299623"></p>
-<p>​    如上图所示，给定输入X后，首先输入$X$会先进入一个特征抽取网络,即$F_{tr}$，得到feature map记为$U$，$U$在$H\times W$方向上进行<strong>压缩</strong>(Squeeze；原文使用的是<strong>全局平均池化</strong>)，从而形成一个通道维（$1\times 1\times C$）的全局嵌入，记为$W$。在压缩操作之后就是<strong>激励</strong>(Excitation)，原文中作者叙述激励的<strong>目的</strong>是<strong>捕获通道维的依赖关系</strong>，同时为了实现该目标，该操作需要满足两个条件，<strong>一个是具有灵活的学习能力，能够学习通道之间的依赖关系，第二个是学习的结果可以是非互斥的，即不是非此即彼的one-hot向量</strong>，满足第一个条件，需要用到全连接层，第二个条件则需要映入激活函数，原文的方法是使用两个全连接层，执行先降维再升维的操作，中间加上Relu函数增加非线性性，如下图所示是SE模块再、应用到Inception和ResNet网络的模型结构图。</p>
-<p><img src="/2019/09/29/SENET/1569743420907.png" alt="1569743420907"></p>
-<p>这样做，比直接使用全连接层的的<strong>好处</strong>有：</p>
-<ol>
-<li>具有更多的非线性（sigmod，降维/升维），更好拟合通道间的依赖关系；</li>
-<li>减少参数量（降维/升维）；</li>
-</ol>
-
-          
+          SENET​    SENET（Squeeze-and-Excitation net）是Imagenet2017的冠军模型，SE其实是可以嵌入到任何网络的模块，任何包含SE模块的网络都可以称之为SENET。原文地址：https://arxiv.org/pdf/1709.01507.pdf
+原理​  
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/09/29/SENET/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -536,6 +553,17 @@
 
           
           
+             <span id="/2018/03/27/配置python2双环境/" class="leancloud_visitors" data-flag-title="ubuntu配置anacuda环境+切换python版本+配置Opencv2+Tensorflow（TX1开发板）">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
 
           
 
@@ -558,24 +586,16 @@
       
         
           
-            <h1 id="配置python2双环境"><a href="#配置python2双环境" class="headerlink" title="配置python2双环境"></a>配置python2双环境</h1><h1 id="Anacuda配置环境"><a href="#Anacuda配置环境" class="headerlink" title="Anacuda配置环境"></a>Anacuda配置环境</h1><p>​    由于实验要求，需要在python2环境下运行代码，但是安装anaconda是python3环境的，在不改动原环境的情况下，可以搭建一个双环境，创建环境命令如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#新建python2.7环境</span></span><br><span class="line">conda create --name python27 python=<span class="number">2.7</span></span><br><span class="line"><span class="comment">#启动环境</span></span><br><span class="line">source activate python27</span><br><span class="line"><span class="comment">#关闭环境</span></span><br><span class="line">deactivate python27</span><br><span class="line"></span><br><span class="line"><span class="comment">#在python27环境中安装各种包（如numpy）</span></span><br><span class="line">conda install -n python27 numpy</span><br><span class="line"><span class="comment">#此时因为默认更新源服务器比较慢（可能是服务器架设在大陆之外），最好更换下添加比较快的更新源，命令如下</span></span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/msys2/</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</span><br><span class="line">conda config --set show_channel_urls yes</span><br><span class="line"></span><br><span class="line"><span class="comment">#查看系统中存在的anacuda环境</span></span><br><span class="line">codna info -e</span><br><span class="line"></span><br><span class="line"><span class="comment">#删除环境</span></span><br><span class="line">conda remove -n 删除的环境 --all</span><br></pre></td></tr></table></figure>
-<h1 id="切换python不同版本："><a href="#切换python不同版本：" class="headerlink" title="切换python不同版本："></a>切换python不同版本：</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#命令行添加代码如下</span></span><br><span class="line">sudo update-alternatives --install /usr/bin/python python /usr/bin/python2 <span class="number">100</span>  <span class="comment">#100为设置的优先级，python后数字为python的版本，可具体到小数点后</span></span><br><span class="line">sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 <span class="number">150</span></span><br><span class="line"></span><br><span class="line">选择python版本：</span><br><span class="line">sudo update-alternatives --config python <span class="comment">#之后按提示选择</span></span><br></pre></td></tr></table></figure>
-<h1 id="配置Opencv2"><a href="#配置Opencv2" class="headerlink" title="配置Opencv2"></a>配置Opencv2</h1><h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一:"></a>方法一:</h2><p>​    安装Opencv的一般命令：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install --channel https://conda.anaconda.org/menpo opencv</span><br></pre></td></tr></table></figure>
-<h2 id="方法2："><a href="#方法2：" class="headerlink" title="方法2："></a>方法2：</h2><p>​    同安装python2环境一样会遇到速度慢的情况，解决办法还是换源：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda config --add channels <span class="string">'https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/'</span></span><br></pre></td></tr></table></figure>
-<p>​    之后直接安装：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install opencv  <span class="comment">#</span></span><br></pre></td></tr></table></figure>
-<p>方法三：</p>
-<p>​    <a href="https://github.com/jayrambhia/Install-OpenCV" target="_blank" rel="noopener">github一键式安装脚本</a></p>
-<h1 id="Tensorflow安装"><a href="#Tensorflow安装" class="headerlink" title="Tensorflow安装"></a>Tensorflow安装</h1><p>​    Tensorflow安装在TX1开发板一直会出现问题，之后也找到一个一键式安装的github源码，确实方便。网址如下：</p>
-<p>​    <a href="https://github.com/jetsonhacks/installTensorFlowTX1" target="_blank" rel="noopener">一键式安装网址</a></p>
-<h1 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h1><p><a href="http://www.lqkweb.com/blog.php?id=1" target="_blank" rel="noopener">Anaconda更新失败解决方法</a> </p>
-<p><a href="https://blog.csdn.net/u012005313/article/details/52985203" target="_blank" rel="noopener">Opencv2安装</a></p>
-<p><a href="https://github.com/jetsonhacks/installTensorFlowTX1" target="_blank" rel="noopener">Tensorflow一键安装</a></p>
-
-          
+          配置python2双环境Anacuda配置环境​    由于实验要求，需要在python2环境下运行代码，但是安装anaconda是python3环境的，在不改动原环境的情况下，可以搭建一个双环境，创建环境命令如下：
+1234567891011121314151617181920#新建python2
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/03/27/配置python2双环境/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -671,6 +691,17 @@
 
           
           
+             <span id="/2018/03/18/cs231n10-12知识点/" class="leancloud_visitors" data-flag-title="cs231n10-12知识点">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
 
           
 
@@ -693,49 +724,19 @@
       
         
           
-            <p>[TOC]</p>
-<h1 id="Lecture10-Recurrent-Neural-Networks"><a href="#Lecture10-Recurrent-Neural-Networks" class="headerlink" title="Lecture10 Recurrent Neural Networks"></a>Lecture10 Recurrent Neural Networks</h1><h2 id="CNN和RNN区别"><a href="#CNN和RNN区别" class="headerlink" title="CNN和RNN区别"></a>CNN和RNN区别</h2><p>​    相较于卷积神经网络需要固定长度的输入和输出，循环神经网络可以是不定长的输入或输出。</p>
-<h2 id="RNN一般使用情景"><a href="#RNN一般使用情景" class="headerlink" title="RNN一般使用情景"></a>RNN一般使用情景</h2><p>​    如下图：第一幅图是普通的卷积网络，剩下的都是循环神经网络。</p>
-<ul>
-<li>one to many: 适用于给图片加标题，加描述</li>
-<li>many to one: 适用于对文字情感分类</li>
-<li>many to many（有延迟）: 适用于机器翻译</li>
-<li>many to many（无延迟）: 对帧图片分类</li>
-</ul>
-<p><img src="/2018/03/18/cs231n10-12知识点/1.PNG" alt=""></p>
-<h2 id="RNN结构"><a href="#RNN结构" class="headerlink" title="RNN结构"></a>RNN结构</h2><p>​    此为RNN单层结构，每个时刻函数f接收上一时刻的隐藏态$h_{t-1}$和当前时刻的输入$x_t$，产生当前时刻的隐藏态$h_t$。其中函数f是关于参数w的函数，在每个时刻参数w和函数f都应该是相同的。输出y可以由当前的隐藏态产生。</p>
-<p>​    RNN不定期会有输入，每次输入都会引起权值改变，每一层的权值共享。</p>
-<p><img src="/2018/03/18/cs231n10-12知识点/2.PNG" alt=""></p>
-<p>RNN展开图：</p>
-<p><img src="/2018/03/18/cs231n10-12知识点/3.PNG" alt=""></p>
-<h2 id="RNN实例：Image-Captioning-with-Attention"><a href="#RNN实例：Image-Captioning-with-Attention" class="headerlink" title="RNN实例：Image Captioning with Attention"></a>RNN实例：Image Captioning with Attention</h2><p>​    图片经过CNN会产生一个L x D的网格向量，代表图像L个不同区域的D维特征向量的整合。网格向量放入RNN中，第一层会产生一个位置的分布，确定下一层网络需要关注图像的位置信息，即下一层网络需要注意的D维向量。之后的每一层都会产生一个关于图像位置的信息分布，除此之外，还会生成一个词汇的分布用来确定输出的单词。</p>
-<p><img src="/2018/03/18/cs231n10-12知识点/4.PNG" alt=""></p>
-<h2 id="Vanilla-RNN-Gradient-Flow梯度爆炸、消失"><a href="#Vanilla-RNN-Gradient-Flow梯度爆炸、消失" class="headerlink" title="Vanilla RNN Gradient Flow梯度爆炸、消失"></a>Vanilla RNN Gradient Flow梯度爆炸、消失</h2><p>​    如下图：对$h_0$求梯度时，由于每个RNN状态都会产生对$h_0$的梯度，如$h_4$要经过4个乘法门（对权值矩阵W的因子求积），才能得到其对$h_0$的梯度。所以在W的最大奇异值大于0的情况下，会产生梯度爆照；在W最小奇异值小于0的情况下，会产生梯度消失的现象。</p>
-<p><img src="/2018/03/18/cs231n10-12知识点/5.PNG" alt=""></p>
-<h2 id="LSTM：解决梯度爆炸、消失"><a href="#LSTM：解决梯度爆炸、消失" class="headerlink" title="LSTM：解决梯度爆炸、消失"></a>LSTM：解决梯度爆炸、消失</h2><p><img src="/2018/03/18/cs231n10-12知识点/6.PNG" alt=""></p>
-<p>​    上图是LSTM的结构图，相较于传统的RNN，LSTM多了细胞状态$c_t$，类似于残差网络梯度的“高速公路”。</p>
-<p>​    其中i，f，o，g分别称为输入门，遗忘门，输出门，门之门。每次$c_t$更新时，都要经过遗忘和写入两个阶段。遗忘阶段$c_{t-1}$会与f逐元素相乘，选择性的丢弃一些信息，f中为1的元素对应的$c_{t-1}$信息得以完全保留，为0的元素对应的$c_{t-1}$信息会被完全丢弃。然后，i与g逐元素相乘，表示有多少新的信息要写入到细胞状态中。之后更新$c_t$。更新后的$c_t$对下一时刻隐藏态$h_t$的影响是通过o来控制的。</p>
-<h2 id="LSTM梯度传播："><a href="#LSTM梯度传播：" class="headerlink" title="LSTM梯度传播："></a>LSTM梯度传播：</h2><p><img src="/2018/03/18/cs231n10-12知识点/6.PNG" alt=""></p>
-<p>​    虽然流经h的梯度流仍然会很大程度衰减，但由于细胞状态C的引入，形成了一条流经C的额外的梯度高速公路。在流经C的路线上，梯度经过加法门是无损的，经过乘法门时，需要逐元素乘以一个f。相比于传统RNN，这里的情况好了很多，因为f在不同的单元中都是不同的，一般不会出现都小于1的情况，此外，逐元素相乘也比矩阵相乘好得多。这样就使得梯度传播到低时间步单元时仍然不衰减，模型能够联系时间上相隔很远的序列信息来进行学习，克服上面提到的长期依赖的问题。（部分博客内容参考<a href="http://www.cnblogs.com/coldyan/p/8385021.html" target="_blank" rel="noopener">coldyan</a>）</p>
-<h1 id="Lecture11-Detection-and-Segmentation"><a href="#Lecture11-Detection-and-Segmentation" class="headerlink" title="Lecture11 Detection and  Segmentation"></a>Lecture11 Detection and  Segmentation</h1><p>​    课程11主要就卷积神经网络的应用进行概要式讲解，里面涉及到语义分割、物体定位、物体检测和物体分割。</p>
-<h2 id="语义分割"><a href="#语义分割" class="headerlink" title="语义分割"></a>语义分割</h2><h3 id="传统框架"><a href="#传统框架" class="headerlink" title="传统框架"></a>传统框架</h3><p><img src="/2018/03/18/cs231n10-12知识点/8.PNG" alt=""></p>
-<p>​    待处理图片会经过多个卷积层处理，最终输出的维度是C x H x W，C表示类别个数，表示每个像素在不同类别上的得分。最终取最大得分为预测类别。梯度则需要将结果与训练集的标签求交叉熵，得到损失函数，然后反向传播学习参数。</p>
-<p>缺点：模型的中间层将保留了图像的大小，非常占内存。</p>
-<h3 id="改进后框架"><a href="#改进后框架" class="headerlink" title="改进后框架"></a>改进后框架</h3><p>改进：对图片先进行欠采样，然后再过采样恢复原图片大小。</p>
-<p><img src="/2018/03/18/cs231n10-12知识点/9.PNG" alt=""></p>
-<h3 id="过采样方法："><a href="#过采样方法：" class="headerlink" title="过采样方法："></a>过采样方法：</h3><h4 id="去池化"><a href="#去池化" class="headerlink" title="去池化"></a>去池化</h4><p><img src="/2018/03/18/cs231n10-12知识点/10.PNG" alt=""></p>
-<p><img src="/2018/03/18/cs231n10-12知识点/11.PNG" alt=""></p>
-<h4 id="转置卷积"><a href="#转置卷积" class="headerlink" title="转置卷积"></a>转置卷积</h4><p><img src="/2018/03/18/cs231n10-12知识点/12.PNG" alt=""></p>
-<p>​    转置卷积是一种可学习的过采样方法。具体步骤是，将输入的每个值作为权重，对滤波器进行加权，然后各个加权的滤波器按照步长拼成输出，重叠部分相加。类似图像卷积过程的反向操作。</p>
-<h1 id="分类、定位"><a href="#分类、定位" class="headerlink" title="分类、定位"></a>分类、定位</h1><p><img src="/2018/03/18/cs231n10-12知识点/13.PNG" alt=""></p>
-<p>​    这个模型主要注意损失函数的设置。</p>
-<h1 id="物体检测"><a href="#物体检测" class="headerlink" title="物体检测"></a>物体检测</h1><p>​    这一块算法很多，现在主要流行的是faster-RCNN、Yolo和SSD，具体就不说明了，太熟了= =。</p>
-<h1 id="物体分割"><a href="#物体分割" class="headerlink" title="物体分割"></a>物体分割</h1><p><img src="/2018/03/18/cs231n10-12知识点/14.PNG" alt=""></p>
-<p>​    Mask RCNN是当将faster RCNN和语义分割结合成一个框架，首先将图像使用CNN处理为特征，然后经过一个RPN网络生成候选区域，投射到之前的feature map。到这里与faster RCNN一样。之后有两个分支，一个分支与faster RCNN相同，预测候选框的分类和边界值，另一个分支则与语义分割相似，为每个像素做分类。</p>
-<h1 id="Lecture12-Visualizing-and-Understanding"><a href="#Lecture12-Visualizing-and-Understanding" class="headerlink" title="Lecture12 Visualizing and Understanding"></a>Lecture12 Visualizing and Understanding</h1><h2 id="可视化卷积"><a href="#可视化卷积" class="headerlink" title="可视化卷积"></a>可视化卷积</h2><h3 id="原因："><a href="#原因：" class="headerlink" title="原因："></a>原因：</h3><p>​    从卷积可视化知晓卷积核在寻找什么。</p>
-<h2 id="t-SNE"><a href="#t-SNE" class="headerlink" title="t_SNE"></a>t_SNE</h2><p>​    可视化特征的非线性降维方法。<a href="http://cs.stanford.edu/people/karpathy/cnnembed/" target="_blank" rel="noopener">t_SNE特征可视化</a></p>
+          [TOC]
+Lecture10 Recurrent Neural NetworksCNN和RNN区别​    相较于卷积神经网络需要固定长度的输入和输出，循环神经网络可以是不定长的输入或输出。
+RNN一般使用情景​    如下图：第一幅图是普通的卷积网络，剩下的都是循环神经网络。
 
-          
+one to m
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/03/18/cs231n10-12知识点/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -831,6 +832,17 @@
 
           
           
+             <span id="/2018/03/12/cs231n7-9知识点/" class="leancloud_visitors" data-flag-title="cs231n7-9知识点">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
 
           
 
@@ -853,45 +865,18 @@
       
         
           
-            <p>[TOC]</p>
-<h1 id="Lecture7-Training-Neural-Networks-Part2"><a href="#Lecture7-Training-Neural-Networks-Part2" class="headerlink" title="Lecture7 Training Neural Networks, Part2"></a>Lecture7 Training Neural Networks, Part2</h1><h2 id="梯度优化方法"><a href="#梯度优化方法" class="headerlink" title="梯度优化方法"></a>梯度优化方法</h2><h3 id="SGD（随机梯度下降）"><a href="#SGD（随机梯度下降）" class="headerlink" title="SGD（随机梯度下降）"></a>SGD（随机梯度下降）</h3><p>缺点：</p>
-<p>（1）容易在梯度大的方向做“之”型移动，在不敏感的梯度方向缓慢移动；</p>
-<p>（2）容易陷入局部极小值和鞍点中（局部极小值在网络结构小时表现严重，鞍点在网络结构大时表现严重）；</p>
-<p>（3）对噪声比较敏感（现实中，数据存在噪声不可避免）</p>
-<h3 id="SGD-Momentum"><a href="#SGD-Momentum" class="headerlink" title="SGD+Momentum"></a>SGD+Momentum</h3><p><img src="/2018/03/12/cs231n7-9知识点/1.png" alt=""></p>
-<p>​    增加动量的方式可以解决SGD的缺点，因为动量可以对梯度方向相反的方向互相抵消，从而抵消“之”字型的上下摆动，对梯度方向相同的的方向有一个加速的效果，从而即使在梯度为0的鞍点或者梯度变化较小的局部极值点，该点依旧包含速度（同引入加速度相同）。</p>
-<h3 id="Nesterov-Momentum"><a href="#Nesterov-Momentum" class="headerlink" title="Nesterov Momentum"></a>Nesterov Momentum</h3><p><img src="/2018/03/12/cs231n7-9知识点/2.png" alt=""></p>
-<h3 id="AdaGrad"><a href="#AdaGrad" class="headerlink" title="AdaGrad"></a>AdaGrad</h3><p><img src="/2018/03/12/cs231n7-9知识点/3.png" alt=""></p>
-<p>优点：</p>
-<p>​    在凸函数可以收敛得很好。</p>
-<p>缺点：</p>
-<p>​    在非凸函数下容易陷入局部极小值。</p>
-<h3 id="RMSProp"><a href="#RMSProp" class="headerlink" title="RMSProp"></a>RMSProp</h3><p><img src="/2018/03/12/cs231n7-9知识点/4.png" alt=""></p>
-<h3 id="Adam"><a href="#Adam" class="headerlink" title="Adam"></a>Adam</h3><h4 id="almost形式"><a href="#almost形式" class="headerlink" title="almost形式"></a>almost形式</h4><p><img src="/2018/03/12/cs231n7-9知识点/5.png" alt=""></p>
-<h4 id="full-form"><a href="#full-form" class="headerlink" title="full form"></a>full form</h4><p><img src="/2018/03/12/cs231n7-9知识点/6.png" alt=""></p>
-<h3 id="特殊优化方法L-BFGS"><a href="#特殊优化方法L-BFGS" class="headerlink" title="特殊优化方法L-BFGS"></a>特殊优化方法L-BFGS</h3><p>​    类似于每次用低级的函数逼近原函数，求最小值。从而不需要设置学习率直接求解。一般用于凸函数，且随机性不高的情况下。</p>
-<h2 id="学习率"><a href="#学习率" class="headerlink" title="学习率"></a>学习率</h2><p><img src="/2018/03/12/cs231n7-9知识点/7.png" alt=""></p>
-<p>​    学习率可以通过衰减的方式，来综合各种学习率的优势。需要注意的是，学习率衰减的参数是在观察损失函数之后设定的。</p>
-<h2 id="正则化"><a href="#正则化" class="headerlink" title="正则化"></a>正则化</h2><h3 id="dropout"><a href="#dropout" class="headerlink" title="dropout"></a>dropout</h3><p>​    每次随机使一些神经元置0，从而达到正则化的效果。一般在全连接层使用，或者对某整个卷积核。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">p = <span class="number">0.5</span> <span class="comment">#神经元置0率</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">train_step</span><span class="params">(X)</span>:</span></span><br><span class="line">    H1 = np.maximum(<span class="number">0</span>, np.dot(W1, X) + b1)</span><br><span class="line">    U1 = np.random.rand(*H1.shape) &lt; p</span><br><span class="line">    H1 *= U1 <span class="comment">#将部分神经元置0 </span></span><br><span class="line">    H2 = np.maximum(<span class="number">0</span>, np.dot(W2, X) + b2)</span><br><span class="line">    U2 = np.random.rand(*H2.shape) &lt; p</span><br><span class="line">    H2 *= U2 <span class="comment">#将部分神经元置0 </span></span><br><span class="line">    out = np.dot(W3, H2) + b3</span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">predict</span><span class="params">(X)</span>:</span></span><br><span class="line">    H1 = np.maximum(<span class="number">0</span>, np.dot(W1, X) + b1)*p</span><br><span class="line">    H2 = np.maximun(<span class="number">0</span>, np.dot(W2, H1) + b2)*p</span><br><span class="line">    out = np.dot(W3, H2) + b3</span><br></pre></td></tr></table></figure>
-<h3 id="batch-normalization"><a href="#batch-normalization" class="headerlink" title="batch normalization"></a>batch normalization</h3><p>​    批量归一化，因为将所有的数据都尽可能放在同一个分布上，从而减弱了数据的随机性，而达到归一化的效果。</p>
-<h3 id="数据增强"><a href="#数据增强" class="headerlink" title="数据增强"></a>数据增强</h3><p>​    对图像进行翻转、旋转、剪切、色彩抖动等，从而扩充数据集，增加了随机性。</p>
-<h3 id="DropConnect"><a href="#DropConnect" class="headerlink" title="DropConnect"></a>DropConnect</h3><p>​    同Dropout类似，不同于Dropout将激活函数置0，将权重矩阵的一些值置0， 从而达到同样的效果。</p>
-<h3 id="Fractional-Max-Pooling"><a href="#Fractional-Max-Pooling" class="headerlink" title="Fractional Max Pooling"></a>Fractional Max Pooling</h3><p>​    部分最大池化：对图像进行随机池化，从而抵消随机性。</p>
-<h3 id="Stochastic-Depth"><a href="#Stochastic-Depth" class="headerlink" title="Stochastic Depth"></a>Stochastic Depth</h3><p>​    随机深度：在训练时消除部分层。</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>​    通常batch normalization就足够正则化了，但是如果发现模型在训练集比测试集效果好太多时，可以尝试其他的正则化方法。而且，需要特别指出的是，相较于其他正则化方法而言，batch normalization不可以控制正则化程度。</p>
-<h2 id="Transfer-Learning"><a href="#Transfer-Learning" class="headerlink" title="Transfer Learning"></a>Transfer Learning</h2><p>​    迁移学习是解决数据集较小的一个常用的方法。</p>
-<p><img src="/2018/03/12/cs231n7-9知识点/8.png" alt=""></p>
-<h1 id="Lecture8-Deep-Learning-Software"><a href="#Lecture8-Deep-Learning-Software" class="headerlink" title="Lecture8 Deep Learning Software"></a>Lecture8 Deep Learning Software</h1><p>​    主要讲Tensor flow、PyTorch、Caffe实现深度学习网络结构。总体建议：</p>
-<p>Tensor flow是最稳妥的选择，因为使用范围广。PyTorch更适合研究。产品、手机端应用开发选择Tensor flow或者caffe2更好一些。</p>
-<h1 id="Lecture9-CNN-Architecture"><a href="#Lecture9-CNN-Architecture" class="headerlink" title="Lecture9  CNN Architecture"></a>Lecture9  CNN Architecture</h1><p>​    主要讲当前比较流行的网络结构，如GoogLeNet、ResNet等。里面Inception模块、bottleneck（瓶颈层）、ResNet、fire模块的概念都比较重要。</p>
-<h3 id="Inception模块"><a href="#Inception模块" class="headerlink" title="Inception模块"></a>Inception模块</h3><p><img src="/2018/03/12/cs231n7-9知识点/9.png" alt=""></p>
-<h3 id="bottleneck"><a href="#bottleneck" class="headerlink" title="bottleneck"></a>bottleneck</h3><p><img src="/2018/03/12/cs231n7-9知识点/10.png" alt=""></p>
-<h3 id="ResNet"><a href="#ResNet" class="headerlink" title="ResNet"></a>ResNet</h3><p><img src="/2018/03/12/cs231n7-9知识点/11.png" alt=""></p>
-<h3 id="Fire模块"><a href="#Fire模块" class="headerlink" title="Fire模块"></a>Fire模块</h3><p><img src="/2018/03/12/cs231n7-9知识点/12.png" alt=""></p>
-<h3 id="网络复杂VS效率比较图"><a href="#网络复杂VS效率比较图" class="headerlink" title="网络复杂VS效率比较图"></a>网络复杂VS效率比较图</h3><p><img src="/2018/03/12/cs231n7-9知识点/13.png" alt=""></p>
-
-          
+          [TOC]
+Lecture7 Training Neural Networks, Part2梯度优化方法SGD（随机梯度下降）缺点：
+（1）容易在梯度大的方向做“之”型移动，在不敏感的梯度方向缓慢移动；
+（2）容易陷入局部极小值和鞍点中（局部极小值在网络结构小时表现严重，鞍点在网络结构大时表现严重）
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/03/12/cs231n7-9知识点/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -987,6 +972,17 @@
 
           
           
+             <span id="/2018/03/10/cs231n1-6知识点/" class="leancloud_visitors" data-flag-title="cs231n1~6知识点">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
 
           
 
@@ -1009,94 +1005,17 @@
       
         
           
-            <p>[TOC]</p>
-<p>​    本文档主要记录学习cs231n课程（2017）内容的笔记。    cs231n是计算机视觉相关的斯坦福大学课程，该课程主要就CNN模型进行讲解，其中也设计了一些基础的机器学习模型和算法，基本上每一章节都会有相应的实验内容来巩固学习。</p>
-<h1 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h1><p><a href="cs231n.github.io/python-numpy-tutorial/">Python Numpy Tutorial</a></p>
-<p><a href="http://www.mooc.ai/course/268/learn?lessonid=1819#lesson/1819" target="_blank" rel="noopener">2017视频</a></p>
-<p><a href="http://cs231n.stanford.edu/syllabus.html" target="_blank" rel="noopener">配套资料</a></p>
-<h1 id="Lecture1-Introduction"><a href="#Lecture1-Introduction" class="headerlink" title="Lecture1 Introduction"></a>Lecture1 Introduction</h1><p>​    课程一主要讲计算机视觉的发展史，计算机视觉的范畴，以及卷积神经网络在目前物体识别方面的重要地位。</p>
-<h1 id="Lecture2-Image-Classification-pipeline"><a href="#Lecture2-Image-Classification-pipeline" class="headerlink" title="Lecture2 Image Classification pipeline"></a>Lecture2 Image Classification pipeline</h1><h2 id="KNN"><a href="#KNN" class="headerlink" title="KNN"></a>KNN</h2><p>​    课程二首先以图片分类讲解了最简单的机器学习算法knn。这里贴上最近邻代码。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NearesetNeighbor</span>:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">  	<span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(self, X, y)</span>:</span></span><br><span class="line">  	<span class="string">"""X is N x D where each row is an example. Y is 1-dimension of size N（X是NxD的训练集，y是n维的label）"""</span></span><br><span class="line">  	self.Xtr = X</span><br><span class="line">  	self.ytr = y</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">predict</span><span class="params">(self, X)</span>:</span></span><br><span class="line">  	<span class="string">"""X is N x d where each row is an example we wish to predict label for(X是测试集)"""</span></span><br><span class="line">  	num_test = X.shape[<span class="number">0</span>]</span><br><span class="line">  	<span class="comment">#num_test是测试集的样例的个数</span></span><br><span class="line">  	Ypred = np.zeros(num_test, dtype = self.self.ytr.dtype)</span><br><span class="line"></span><br><span class="line">  	<span class="keyword">for</span> i <span class="keyword">in</span> xrange(num_test):</span><br><span class="line">  		distances = np.sum(np.abs(self.Xtr - X[i,:]), axis = <span class="number">1</span>)</span><br><span class="line">  		<span class="comment">#这里用到了广播机制</span></span><br><span class="line">  		min_index = np.argmin(distances)</span><br><span class="line">  		<span class="comment">#得到distances中的最小值的下标</span></span><br><span class="line">  		Ypred[i] = self.ytr[min_index]</span><br><span class="line">  	<span class="keyword">return</span> Ypred</span><br></pre></td></tr></table></figure>
-<p>​    课程还有讲述距离的概念，一般距离用范式来阐述，这里就不一一赘述了。</p>
-<p>​    课程也有提及到knn并不适用于处理图像，因为复杂度太高，距离运算不方便。</p>
-<h2 id="Linear-Classification"><a href="#Linear-Classification" class="headerlink" title="Linear Classification"></a>Linear Classification</h2><p>​    线性分类器，课程的叙述和一般的机器学习书籍内容相似，主要是引出优化和损失函数的问题，是lecture3的内容。</p>
-<h1 id="lecture3-Loss-Functions-and-Optimization"><a href="#lecture3-Loss-Functions-and-Optimization" class="headerlink" title="lecture3 Loss Functions and Optimization"></a>lecture3 Loss Functions and Optimization</h1><p>​    课程三主要讲损失函数和优化问题。</p>
-<h2 id="Hinge-loss"><a href="#Hinge-loss" class="headerlink" title="Hinge  loss"></a>Hinge  loss</h2><p><img src="/2018/03/10/cs231n1-6知识点/1.png" alt="Hinge loss"></p>
-<p>​    hinge loss是一种可以用来求解间隔最大化的问题，典型的就是SVM问题的求解。简单来说对于一个测试样例，其正确分类类别为$a_i$，预测结果为$[a_1,a_2,…,a_i,…a_n]$，分类器对其预测带来的损失是：</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:right">$L_i$</th>
-<th style="text-align:left">$ = \sum_{j\not=y_i}max(0,a_j-a_i+1)$</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:right"></td>
-<td style="text-align:left">$=max(0,a_1-a_i+1)+max(0,a_2-a_i+1)+…+…max(a_n-a_i+1)$</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>代码：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">L_i_vectorized</span><span class="params">(x,y,W)</span>:</span></span><br><span class="line">  scores = W.dot(x)</span><br><span class="line">  margins = np.maximum(<span class="number">0</span>, scores - scores[y] + <span class="number">1</span>)</span><br><span class="line">  margins[y] = <span class="number">0</span></span><br><span class="line">  loss_i = np.sum(margins)</span><br><span class="line">  <span class="keyword">return</span> loss_i</span><br></pre></td></tr></table></figure>
-<h2 id="Softmax-Classifier"><a href="#Softmax-Classifier" class="headerlink" title="Softmax Classifier"></a>Softmax Classifier</h2><p><img src="/2018/03/10/cs231n1-6知识点/2.png" alt="Hinge loss"></p>
-<h2 id="Optimization"><a href="#Optimization" class="headerlink" title="Optimization"></a>Optimization</h2><p>​    课程中主要讲梯度优化，简单来说就是对损失函数求导，得到梯度反馈到权值上。</p>
-<h1 id="lecture4-Backpropagation-and-Neural-Networks"><a href="#lecture4-Backpropagation-and-Neural-Networks" class="headerlink" title="lecture4 Backpropagation and Neural Networks"></a>lecture4 Backpropagation and Neural Networks</h1><h2 id="前向传播代码"><a href="#前向传播代码" class="headerlink" title="前向传播代码"></a>前向传播代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#forward-pass of a 3-layer neural network</span></span><br><span class="line">f = <span class="keyword">lambda</span> x: <span class="number">1.0</span>/(<span class="number">1.0</span> + np.exp(-x))</span><br><span class="line">x = np.random.randn(<span class="number">3</span>, <span class="number">1</span>)</span><br><span class="line">h1 = f(np.dot(W1, x) + b1)</span><br><span class="line">h2 = f(np.dot(W2, h1) + b2)</span><br><span class="line">out = np.dot(W3, h2) + b3</span><br></pre></td></tr></table></figure>
-<h2 id="Back-propagation"><a href="#Back-propagation" class="headerlink" title="Back propagation"></a>Back propagation</h2><p>​    第四讲只要讲的是反向传播，这里贴上两张对矩阵求导的推导，觉得蛮有意思的：</p>
-<p><img src="/2018/03/10/cs231n1-6知识点/3.png" alt="对W求导"></p>
-<p><img src="/2018/03/10/cs231n1-6知识点/4.png" alt="对x求导"></p>
-<h2 id="Activation-function"><a href="#Activation-function" class="headerlink" title="Activation function"></a>Activation function</h2><p><img src="/2018/03/10/cs231n1-6知识点/5.png" alt="激活函数"></p>
-<h1 id="lecture5-Convolutional-Neural-Networks"><a href="#lecture5-Convolutional-Neural-Networks" class="headerlink" title="lecture5 Convolutional Neural Networks"></a>lecture5 Convolutional Neural Networks</h1><p>课程五是卷积神经网络的入门课程，这里先介绍一些术语：</p>
-<p>输入图像input image大小为N x N；</p>
-<p>卷积核（滤波器）的大小为K x K；</p>
-<p>stride为步长，是卷积核每次移动的像素数，记为S；</p>
-<p>pad为边缘填充0的个数记为P；</p>
-<p>输出图像的大小计算公式为：( N - K + 2*P ) / S + 1 。</p>
-<h1 id="Lecture6-Training-Neural-Networks-Part-I"><a href="#Lecture6-Training-Neural-Networks-Part-I" class="headerlink" title="Lecture6 Training Neural Networks, Part I"></a>Lecture6 Training Neural Networks, Part I</h1><h2 id="卷积网络overview"><a href="#卷积网络overview" class="headerlink" title="卷积网络overview"></a>卷积网络overview</h2><p>（1）：一次性设置（One time setup）：</p>
-<p>激活函数（Activation functions）</p>
-<p>预处理(Data </p>
-<p>Preprocessing)</p>
-<p>权值初始化（Weight Initialization）</p>
-<p>正则化(Regularization)</p>
-<p>梯度检查(Gradient checking)；</p>
-<p>（2）：动态训练（Training dynamics）：</p>
-<p>观察学习过程（Babysitting the learning process）</p>
-<p>参数更新（Parameter updates）</p>
-<p>超参数优化（Hyperparameter optimization ）</p>
-<p>（3）：评估（Evaluation）</p>
-<p>模型装配（model ensembles）</p>
-<h2 id="激活函数优缺点"><a href="#激活函数优缺点" class="headerlink" title="激活函数优缺点"></a>激活函数优缺点</h2><p><img src="/2018/03/10/cs231n1-6知识点/7.png" alt=""></p>
-<h3 id="Sigmoid"><a href="#Sigmoid" class="headerlink" title="Sigmoid"></a>Sigmoid</h3><p>​    Sigmoid函数是之前应用最为广泛的函数，因为其函数在两端接近于饱和，有很好的解释性（适合作为阈值函数）以及良好的导数性质。但在实际应用中Sigmoid函数缺点很明显：</p>
-<p>（1）容易出现梯度消失的现象（输入值过大过小，梯度为0；输入值为0时，梯度为无穷）；</p>
-<p>（2）Sigmoid函数的输出值不是以0为中心的，梯度更新时，只能往正方向或负方向更新（前一个神经元经过激活函数的输出全为正，在对当前神经元的权值W求导时，结果即皆为正或皆为负）；</p>
-<p><img src="/2018/03/10/cs231n1-6知识点/6.png" alt="Sigmoid"></p>
-<p>（3）Sigmoid有指数运算，计算代价太大。</p>
-<h3 id="tanh（x）"><a href="#tanh（x）" class="headerlink" title="tanh（x）"></a>tanh（x）</h3><p>​    虽然tanh()函数输出分布在（-1，1）,但还是会出现梯度消失的现象。</p>
-<h3 id="ReLU"><a href="#ReLU" class="headerlink" title="ReLU"></a>ReLU</h3><p>优点： ReLU 得到的SGD的收敛速度会比 sigmoid/tanh 快很多(如上图右)。有人说这是因为它是linear，而且梯度不会饱和；并且计算简单。</p>
-<p>缺点：ReLU在训练的时候很”脆弱”，一不小心有可能导致神经元”坏死”。（由于ReLU在x&lt;0时梯度为0，这样就导致负的梯度在这个ReLU被置零，而且这个神经元有可能再也不会被任何数据激活。如果这个情况发生了，那么这个神经元之后的梯度就永远是0了，也就是ReLU神经元坏死了，不再对任何数据有所响应）实际操作中，如果你的learning rate 很大，那么很有可能你网络中的40%的神经元都坏死了。 当然，如果你设置了一个合适的较小的learning rate，这个问题发生的情况其实也不会太频繁。</p>
-<h3 id="Leaky-ReLU"><a href="#Leaky-ReLU" class="headerlink" title="Leaky ReLU"></a>Leaky ReLU</h3><p>​    基本同ReLU，但是解决了ReLU神经元坏死的情况。</p>
-<h3 id="Maxout"><a href="#Maxout" class="headerlink" title="Maxout"></a>Maxout</h3><p>​    形式为$f(x)=max(w_1^Tx+b_1,w_2^Tx+b_2)$，是ReLU及Leaky ReLU的集成版，优点很明显，缺点是参数会增多。</p>
-<h3 id="建议"><a href="#建议" class="headerlink" title="建议"></a>建议</h3><p>​    使用ReLU，但是注意设置学习率，可以尝试Leaky ReLU/Maxout/ELU</p>
-<h2 id="Preprocess-the-data"><a href="#Preprocess-the-data" class="headerlink" title="Preprocess the data"></a>Preprocess the data</h2><p>​    数据归一化，作用：避免出现输入数据比较极端的情况（如输入全为正，则梯度更新方向则为正或为负），二者可以人为控制输入数据的分布，从而使得训练数据和测试数据尽可能分布相同。</p>
-<h2 id="Weight-Initialization"><a href="#Weight-Initialization" class="headerlink" title="Weight Initialization"></a>Weight Initialization</h2><p>​    权值初始化是一个非常值得研究的领域，在激活函数为tanh的网络中：</p>
-<p>（1）如果权值初始化过小（如$W=0.01*np.random.randn(fan_{in},fan_{out})$）,则在网络层数较深的网络中，激活值会趋近于0（网络层数较深时，权值累乘会接近于0）。</p>
-<p>（2）如果权值初始化过大（如$W=1.0*np.random.randn(fan_{in},fan_{out})$）,则所有神经元会饱和，梯度为0。</p>
-<p>（3）比较合理的权值初始化$W=np.random.randn(fan_{in},fan_{out}) / np.sqrt(fan_{in})$</p>
-<p>​    <strong>如果激活函数是ReLU，由于只有大于0的部分会被激活，所以激活函数为$W=0.01*np.random.randn(fan_{in},fan_{out}) / np.sqrt(fan_{in}/2)$</strong></p>
-<h2 id="Batch-Normalization"><a href="#Batch-Normalization" class="headerlink" title="Batch Normalization"></a>Batch Normalization</h2><p>​    批量归一化通常是在全连接层和卷积层之后插入的，可以将输入数据的分布变为单位高斯函数。需要注意的是，批量归一化不仅仅是对每层网络输入数据的归一化，这里面还有一个变换重构的过程，目的是防止某层网络本身的作用是改变数据分布，这样就需要学习参数，让归一化的数据恢复到学习到的分布特征。批量归一化的优点有：<img src="/2018/03/10/cs231n1-6知识点/8.png" alt="Sigmoid"></p>
-<p>（1）改善了梯度在网络中的传播；</p>
-<p>（2）允许更高的学习率；</p>
-<p>（3）减少了网络对初始化的依赖程度；</p>
-<p>（4）改善正则化策略，可以减少使用dropout层（每个输入数据都是经过其他所有样本经验化均值、方差归一化而来）。</p>
-<h2 id="Babysitting-the-Learning-Process"><a href="#Babysitting-the-Learning-Process" class="headerlink" title="Babysitting the Learning Process"></a>Babysitting the Learning Process</h2><p>​    观察学习过程是为了监视训练过程，并及时调整超参数来获得比较好的结果。</p>
-<h3 id="完整性检查："><a href="#完整性检查：" class="headerlink" title="完整性检查："></a>完整性检查：</h3><p>​    （1）：在网络刚初始化时，可以通过计算网络损失函数的值，来判定网络是否完整（如共有十个类别，网络应当有9成判断为错）。</p>
-<p>​    （2）：从小数据集开始训练（此时网络足够复杂，可以完全拟合小数据集。）</p>
-<h3 id="确定学习率："><a href="#确定学习率：" class="headerlink" title="确定学习率："></a>确定学习率：</h3><p>​    学习率过低，会导致loss值变化不大，收敛过慢；学习率过大，会导致网络不稳定。一般学习率设置为$[1e^{-3},1e^{-5}]$之间，采用交叉验证，选取最佳的学习率。</p>
-<h2 id="Hyperparameter-Optimization"><a href="#Hyperparameter-Optimization" class="headerlink" title="Hyperparameter Optimization"></a>Hyperparameter Optimization</h2><p>​    超参数选取一般是在训练集上，选取几个粗略值，在几个epoch里进行交叉验证。粗略值可以通过经验选择，也可以通过随机选择。</p>
-
-          
+          [TOC]
+​    本文档主要记录学习cs231n课程（2017）内容的笔记。    cs231n是计算机视觉相关的斯坦福大学课程，该课程主要就CNN模型进行讲解，其中也设计了一些基础的机器学习模型和算法，基本上每一章节都会有相应的实验内容来巩固学习。
+资料Python Numpy Tutoria
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/03/10/cs231n1-6知识点/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1192,6 +1111,17 @@
 
           
           
+             <span id="/2018/03/10/sublime-text3的使用python版/" class="leancloud_visitors" data-flag-title="sublime text3的使用（python版）">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
 
           
 
@@ -1214,43 +1144,17 @@
       
         
           
-            <p>第一篇博客决定写sublime text3的使用（python版），sublime text3是因为偶然的原因发现的，陡然发现这个轻量级的编辑器很好用，安利一下。</p>
-<h1 id="sublime-text3的使用"><a href="#sublime-text3的使用" class="headerlink" title="sublime text3的使用"></a>sublime text3的使用</h1><h2 id="sublime-text3的安装"><a href="#sublime-text3的安装" class="headerlink" title="sublime text3的安装"></a>sublime text3的安装</h2><p>sublime text3安装地址：<a href="http://www.sublimetext.com/" target="_blank" rel="noopener">sublime text3</a></p>
-<p>window用户直接下载安装就好了，注意安装过程中会有选择项如下：</p>
-<p><img src="/2018/03/10/sublime-text3的使用python版/1.png" alt="option"></p>
-<p>这样Sublime Text可以被添加到右键中，在右键单击文件时，可以直接使用Sublime Text打开。</p>
-<h2 id="插件安装"><a href="#插件安装" class="headerlink" title="插件安装"></a>插件安装</h2><p>sublime text3有很多插件其中只有Package Control是需要在控制台输入python代码安装的，其他插件都可以在Package Control中直接安装。下面我们开始安装Package Control插件</p>
-<h3 id="Package-Control安装"><a href="#Package-Control安装" class="headerlink" title="Package Control安装"></a>Package Control安装</h3><p>(1)首先需要在sublime text3界面键入：Ctrl+`(`符号是Esc键下面的键，也是~键)，键入后，sublime text3如下所示：</p>
-<p><img src="/2018/03/10/sublime-text3的使用python版/2.png" alt="Ctrl+\`"></p>
-<p>(2)在控制台输入部分（最后只有一行的小方框）输入代码（代码地址<a href="https://packagecontrol.io/installation#st2" target="_blank" rel="noopener">官网</a>）：</p>
-<p>sublime Text3：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> urllib.request,os,hashlib;</span><br><span class="line">h = <span class="string">'6f4c264a24d933ce70df5dedcf1dcaee'</span> + <span class="string">'ebe013ee18cced0ef93d5f746d80ef60'</span>; </span><br><span class="line">pf = <span class="string">'Package Control.sublime-package'</span>; </span><br><span class="line">ipp = sublime.installed_packages_path();</span><br><span class="line">urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); </span><br><span class="line">by = urllib.request.urlopen( <span class="string">'http://packagecontrol.io/'</span> + pf.replace(<span class="string">' '</span>, <span class="string">'%20'</span>)).read(); </span><br><span class="line">dh = hashlib.sha256(by).hexdigest(); </span><br><span class="line">print(<span class="string">'Error validating download (got %s instead of %s), please try manual install'</span> % (dh, h)) <span class="keyword">if</span> dh != h <span class="keyword">else</span> open(os.path.join( ipp, pf), <span class="string">'wb'</span> ).write(by)</span><br></pre></td></tr></table></figure>
-<p>sublime Text2：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> urllib2,os,hashlib; </span><br><span class="line">h = <span class="string">'6f4c264a24d933ce70df5dedcf1dcaee'</span> + <span class="string">'ebe013ee18cced0ef93d5f746d80ef60'</span>;</span><br><span class="line">pf = <span class="string">'Package Control.sublime-package'</span>; </span><br><span class="line">ipp = sublime.installed_packages_path(); </span><br><span class="line">os.makedirs( ipp ) <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(ipp) <span class="keyword">else</span> <span class="keyword">None</span>; </span><br><span class="line">urllib2.install_opener( urllib2.build_opener( urllib2.ProxyHandler()) ); </span><br><span class="line">by = urllib2.urlopen( <span class="string">'http://packagecontrol.io/'</span> + pf.replace(<span class="string">' '</span>, <span class="string">'%20'</span>)).read(); dh = hashlib.sha256(by).hexdigest();</span><br><span class="line">open( os.path.join( ipp, pf), <span class="string">'wb'</span> ).write(by) <span class="keyword">if</span> dh == h <span class="keyword">else</span> <span class="keyword">None</span>; print(<span class="string">'Error validating download (got %s instead of %s), please try manual install'</span> % (dh, h) <span class="keyword">if</span> dh != h <span class="keyword">else</span> <span class="string">'Please restart Sublime Text to finish installation'</span>)</span><br></pre></td></tr></table></figure>
-<p>之后就是安静的等待它安装完成了。</p>
-<p>（3）安装完成之后，在sublime Text3界面键入：Ctrl+Shift+p,调出命令面板，输入picp（Package Control：Install Package），回车，如若出现下图所示，即安装完成。</p>
-<p><img src="/2018/03/10/sublime-text3的使用python版/3.png" alt="Package Control"></p>
-<p>否则重复上述步骤，或者选择手动安装，安装方法可见百度，或者官网。</p>
-<h3 id="其他插件安装"><a href="#其他插件安装" class="headerlink" title="其他插件安装"></a>其他插件安装</h3><p>这里主要介绍两个插件，一个是代码提示插件SublimeCodeIntel用来代码提示，一个是SublimeTmpl，可以用来快速配置各种语言的模板。由于配置的方法类似，都是用之前安装的Package Control安装的，这里就只介绍SublimeCodeIntel的安装。</p>
-<p>（1）键入Ctrl+Shift+p，进入Package Control命令面板；</p>
-<p>（2）输入picp（会有默认选项）进入Package Control安装插件面板；</p>
-<p>（3）输入SublimeCodeIntel，选中相应的插件安装即可。</p>
-<p>这里介绍下SublimeTmpl自定义模板的使用，如若需要自己编辑的模板，见<a href="http://blog.csdn.net/u011254082/article/details/51669889" target="_blank" rel="noopener">配置</a>:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ctrl+alt+h <span class="comment">#html模板</span></span><br><span class="line">ctrl+alt+j <span class="comment">#javascript模板</span></span><br><span class="line">ctrl+alt+c <span class="comment">#css模板</span></span><br><span class="line">ctrl+alt+p <span class="comment">#php模板</span></span><br><span class="line">ctrl+alt+r <span class="comment">#ruby模板</span></span><br><span class="line">ctrl+alt+shift+p <span class="comment">#python模板</span></span><br></pre></td></tr></table></figure>
-<h1 id="sublime-Text3-的python交互"><a href="#sublime-Text3-的python交互" class="headerlink" title="sublime Text3 的python交互"></a>sublime Text3 的python交互</h1><p>sublime Text3可以编辑多种语言，但是每次都要设置，这里为了方便python的交互使用，可以自己设置键位，如按F1进入python的ide界面，F2编译python文件。</p>
-<h2 id="安装SublimeREPL"><a href="#安装SublimeREPL" class="headerlink" title="安装SublimeREPL"></a>安装SublimeREPL</h2><p>（1）键入Ctrl+Shift+p，进入Package Control命令面板；</p>
-<p>（2）输入picp（会有默认选项）进入Package Control安装插件面板；（3）输入SublimeREPL，选中相应的插件安装即可。</p>
-<p>安装之后，通过选项Tools-&gt;SublimeREPL-&gt;Python，就能进入python的ide界面了</p>
-<h1 id="键位绑定"><a href="#键位绑定" class="headerlink" title="键位绑定"></a>键位绑定</h1><p>打开Preferences-&gt;Key Bindings-User，复制一下代码：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">"keys"</span>:[<span class="string">"f1"</span>],</span><br><span class="line"><span class="string">"caption"</span>: <span class="string">"SublimeREPL: Python"</span>,</span><br><span class="line"><span class="string">"command"</span>: <span class="string">"run_existing_window_command"</span>, <span class="string">"args"</span>:</span><br><span class="line">&#123;<span class="string">"id"</span>: <span class="string">"repl_python"</span>,</span><br><span class="line"><span class="string">"file"</span>: <span class="string">"config/Python/Main.sublime-menu"</span>&#125;&#125;</span><br></pre></td></tr></table></figure>
-<p>即可实现按F1进入python的ide。</p>
-<p><img src="/2018/03/10/sublime-text3的使用python版/4.png" alt="热键设置"></p>
-<p>同理，复制代码（注意两份代码之间需要加逗号）</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">"keys"</span>:[<span class="string">"f2"</span>],</span><br><span class="line"><span class="string">"caption"</span>: <span class="string">"SublimeREPL: Python - RUN current file"</span>,</span><br><span class="line"><span class="string">"command"</span>: <span class="string">"run_existing_window_command"</span>, <span class="string">"args"</span>:</span><br><span class="line">&#123;<span class="string">"id"</span>: <span class="string">"repl_python_run"</span>,</span><br><span class="line"><span class="string">"file"</span>: <span class="string">"config/Python/Main.sublime-menu"</span>&#125;&#125;</span><br></pre></td></tr></table></figure>
-<p>即可实现按F2编译python文件（文件编辑之后必须按Ctrl+s保存后，才能编译）。（参考<a href="https://www.zhihu.com/question/22904994" target="_blank" rel="noopener">知乎</a>）</p>
-<h1 id="其他介绍"><a href="#其他介绍" class="headerlink" title="其他介绍"></a>其他介绍</h1><p><a href="https://segmentfault.com/a/1190000004248611" target="_blank" rel="noopener">拓展插件介绍</a></p>
-
-          
+          第一篇博客决定写sublime text3的使用（python版），sublime text3是因为偶然的原因发现的，陡然发现这个轻量级的编辑器很好用，安利一下。
+sublime text3的使用sublime text3的安装sublime text3安装地址：sublime text3
+wind
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/03/10/sublime-text3的使用python版/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1571,6 +1475,113 @@
 
 
   
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("OoCvMLcxA1WT9cJOsBwbfxXF-gzGzoHsz", "IrUqf869lpWXWOOTvvYWzBTX");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
 
   
 
