@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="杨学斌的博客">
 <meta property="og:description" content="Domain Adaptive Faster R-CNN for Object Detection in the Wild​    目标检测通常都假设训练集和测试集独立同分布，然而在现实场景中，这样的假设往往都是不成立的，也导致了模型在现实应用中的表现急剧下降。DA-faster-rcnn就是用来解决这个问题，从而提升交叉领域中目标检测模型的鲁棒性。 存在问题 图像级别位移：图像风格，光照等； 实">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-08T14:35:56.124Z">
+<meta property="og:updated_time" content="2019-10-08T14:38:37.295Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Domain Adaptation Faster-rcnn">
 <meta name="twitter:description" content="Domain Adaptive Faster R-CNN for Object Detection in the Wild​    目标检测通常都假设训练集和测试集独立同分布，然而在现实场景中，这样的假设往往都是不成立的，也导致了模型在现实应用中的表现急剧下降。DA-faster-rcnn就是用来解决这个问题，从而提升交叉领域中目标检测模型的鲁棒性。 存在问题 图像级别位移：图像风格，光照等； 实">
@@ -904,6 +904,26 @@ d_H(S,T)=（1-\min_{h \in{H}}(err_s(h(x)) + err_t (h(x))))</script><p>S代表源
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 
