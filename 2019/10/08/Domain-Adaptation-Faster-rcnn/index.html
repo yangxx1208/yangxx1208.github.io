@@ -79,21 +79,17 @@
 
 
 
-<meta name="description" content="CBAM​    CBAM（Convolutional Block Attention Module）也是一种运用attention机制嵌入到卷积神经网络的模块，不同于SENET，CBAM不仅考虑了通道维（channel）的注意力机制，还结合了空间维（Spatial），也取得了更好的结果。原文地址：https://arxiv.org/pdf/1807.06521.pdf 原理​    SENET是">
+<meta name="description" content="Domain Adaptive Faster R-CNN for Object Detection in the Wild​    目标检测通常都假设训练集和测试集独立同分布，然而在现实场景中，这样的假设往往都是不成立的，也导致了模型在现实应用中的表现急剧下降。DA-faster-rcnn就是用来解决这个问题，从而提升交叉领域中目标检测模型的鲁棒性。 存在问题 图像级别位移：图像风格，光照等； 实">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CBAM">
-<meta property="og:url" content="http://yoursite.com/2019/09/29/CBAM/index.html">
+<meta property="og:title" content="Domain Adaptation Faster-rcnn">
+<meta property="og:url" content="http://yoursite.com/2019/10/08/Domain-Adaptation-Faster-rcnn/index.html">
 <meta property="og:site_name" content="杨学斌的博客">
-<meta property="og:description" content="CBAM​    CBAM（Convolutional Block Attention Module）也是一种运用attention机制嵌入到卷积神经网络的模块，不同于SENET，CBAM不仅考虑了通道维（channel）的注意力机制，还结合了空间维（Spatial），也取得了更好的结果。原文地址：https://arxiv.org/pdf/1807.06521.pdf 原理​    SENET是">
+<meta property="og:description" content="Domain Adaptive Faster R-CNN for Object Detection in the Wild​    目标检测通常都假设训练集和测试集独立同分布，然而在现实场景中，这样的假设往往都是不成立的，也导致了模型在现实应用中的表现急剧下降。DA-faster-rcnn就是用来解决这个问题，从而提升交叉领域中目标检测模型的鲁棒性。 存在问题 图像级别位移：图像风格，光照等； 实">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2019/09/29/CBAM/1569818528245.png">
-<meta property="og:image" content="http://yoursite.com/2019/09/29/CBAM/1569745869898-1569764526477.png">
-<meta property="og:image" content="http://yoursite.com/2019/09/29/CBAM/1569747737199-1569764526478.png">
-<meta property="og:updated_time" content="2019-09-30T04:42:21.240Z">
+<meta property="og:updated_time" content="2019-10-08T14:35:56.124Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CBAM">
-<meta name="twitter:description" content="CBAM​    CBAM（Convolutional Block Attention Module）也是一种运用attention机制嵌入到卷积神经网络的模块，不同于SENET，CBAM不仅考虑了通道维（channel）的注意力机制，还结合了空间维（Spatial），也取得了更好的结果。原文地址：https://arxiv.org/pdf/1807.06521.pdf 原理​    SENET是">
-<meta name="twitter:image" content="http://yoursite.com/2019/09/29/CBAM/1569818528245.png">
+<meta name="twitter:title" content="Domain Adaptation Faster-rcnn">
+<meta name="twitter:description" content="Domain Adaptive Faster R-CNN for Object Detection in the Wild​    目标检测通常都假设训练集和测试集独立同分布，然而在现实场景中，这样的假设往往都是不成立的，也导致了模型在现实应用中的表现急剧下降。DA-faster-rcnn就是用来解决这个问题，从而提升交叉领域中目标检测模型的鲁棒性。 存在问题 图像级别位移：图像风格，光照等； 实">
 
 
 
@@ -123,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/09/29/CBAM/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/10/08/Domain-Adaptation-Faster-rcnn/"/>
 
 
 
 
 
-  <title>CBAM | 杨学斌的博客</title>
+  <title>Domain Adaptation Faster-rcnn | 杨学斌的博客</title>
   
 
 
@@ -236,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/29/CBAM/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/08/Domain-Adaptation-Faster-rcnn/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Xuebin Yang">
@@ -253,7 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">CBAM</h1>
+          <h1 class="post-title" itemprop="name headline">Domain Adaptation Faster-rcnn</h1>
         
 
         <div class="post-meta">
@@ -265,8 +261,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-29T21:40:17+08:00">
-                2019-09-29
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-08T22:35:24+08:00">
+                2019-10-08
               </time>
             
 
@@ -284,8 +280,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/09/29/CBAM/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count gitment-comments-count" data-xid="/2019/09/29/CBAM/" itemprop="commentsCount"></span>
+                <a href="/2019/10/08/Domain-Adaptation-Faster-rcnn/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2019/10/08/Domain-Adaptation-Faster-rcnn/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -293,7 +289,7 @@
 
           
           
-             <span id="/2019/09/29/CBAM/" class="leancloud_visitors" data-flag-title="CBAM">
+             <span id="/2019/10/08/Domain-Adaptation-Faster-rcnn/" class="leancloud_visitors" data-flag-title="Domain Adaptation Faster-rcnn">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -329,16 +325,46 @@
       
 
       
-        <h1 id="CBAM"><a href="#CBAM" class="headerlink" title="CBAM"></a>CBAM</h1><p>​    CBAM（Convolutional Block Attention Module）也是一种运用attention机制嵌入到卷积神经网络的模块，不同于SENET，CBAM不仅考虑了通道维（channel）的注意力机制，还结合了空间维（Spatial），也取得了更好的结果。原文地址：<a href="https://arxiv.org/pdf/1807.06521.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1807.06521.pdf</a></p>
-<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>​    SENET是根据现有学习到的特征来重新校准各个通道特征的重要程度，以此类推，CBAM就是在SENET的基础上做了扩展，增加了对空间维（$H \times W$）的注意力机制，通道维的注意力机制是为了降低信息量较少通道的影响，空间维的注意力机制则是降低某个位置上对结果的影响，用作者的话就是对特征进行精炼。</p>
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p><img src="/2019/09/29/CBAM/1569818528245.png" alt="1569818528245"></p>
-<p>​    如上图所示，CBAM共有连个子模块，通道模块（Channel Attention Module）和空间模块（Spatial Attention Module）。</p>
-<h3 id="通道模块"><a href="#通道模块" class="headerlink" title="通道模块"></a>通道模块</h3><p>​    通道模块注重于什么（<strong>what</strong>）特征对task更有用。输入特征（Input Feature）首先会经过通道模块，这里的通道模块与SENET很相像，但是相比于SENET，通道模块除了使用全局平均池化外，还增加了全局最大池化，如下图所示：</p>
-<p><img src="/2019/09/29/CBAM/1569745869898-1569764526477.png" alt="1569745869898"></p>
-<p>​    全局平均池化和全局最大池化各生成一个$1 \times 1\times C$的向量，在经过多层感知机后，对两个向量进行相加，并取Sigmod函数转化后的结果，作为该模块的输出。 作者在多层感知机中也用到了和SENET类似的降/升维的操作，用来<strong>减少参数量</strong>；</p>
-<h3 id="空间模块"><a href="#空间模块" class="headerlink" title="空间模块"></a>空间模块</h3><p><img src="/2019/09/29/CBAM/1569747737199-1569764526478.png" alt="1569747737199"></p>
-<p>​    空间模块主要利用特征的空间关系，不同于通道模块，空间模块更注重哪儿(<strong>where</strong>)的特征更重要。空间模块的输入是经过通道模块精炼后的特征记为$F’$，与通道模块类似，$F’$也会经过平均池化和最大池化，只不过是在通道维进行池化，生成的是$H \times W\times 1$的特征向量，池化后将两个向量进行通道维度上的拼接，再使用$7 \times 7$卷积层生成$H \times W\times 1$的特征向量,经过Sigmod操作后，得到Spatial Attention。</p>
-<h2 id="Tricks"><a href="#Tricks" class="headerlink" title="Tricks"></a>Tricks</h2><p>​    通道模块和空间模块可以并行，可以顺序；从作者实验结果来看顺序的要好些，且通道模块先进行的最优。</p>
+        <h1 id="Domain-Adaptive-Faster-R-CNN-for-Object-Detection-in-the-Wild"><a href="#Domain-Adaptive-Faster-R-CNN-for-Object-Detection-in-the-Wild" class="headerlink" title="Domain Adaptive Faster R-CNN for Object Detection in the Wild"></a>Domain Adaptive Faster R-CNN for Object Detection in the Wild</h1><p>​    目标检测通常都假设训练集和测试集独立同分布，然而在现实场景中，这样的假设往往都是不成立的，也导致了模型在现实应用中的表现急剧下降。DA-faster-rcnn就是用来解决这个问题，从而提升交叉领域中目标检测模型的鲁棒性。</p>
+<h2 id="存在问题"><a href="#存在问题" class="headerlink" title="存在问题"></a>存在问题</h2><ol>
+<li>图像级别位移：图像风格，光照等；</li>
+<li>实例级别位移：物体外观，大小等。</li>
+</ol>
+<h2 id="贡献点："><a href="#贡献点：" class="headerlink" title="贡献点："></a>贡献点：</h2><ol>
+<li>设计了两个领域自适应组件，分别从图像级别和实例级别来减少领域差异，两个组件都是基于H-divergence设计的，通过设计领域分类器来实现特征对齐；</li>
+<li>对目标检测中的领域偏移问题从概率论的角度做了理论分析；</li>
+<li>提出了一致性正则化，使得RPN是领域不变的。</li>
+</ol>
+<h2 id="理论分析"><a href="#理论分析" class="headerlink" title="理论分析"></a>理论分析</h2><p>​    目标检测问题可以看作是学习后验$P(C,B|I)$，其中$I$是图像表征，$B$是一个物体的检测框，$C$是类别，令$P(C,B,I)$表示训练集的联合分布，$P_{S}(C,B,I）$和$P_T(C,B,I)$分别表示源域的联合分布和目标域的联合分布。以下使用$P_T(C,B,I)$对领域偏移问题进行分析，即$P_{S}(C,B,I）\not=P_T(C,B,I)$问题。以下从图像层面和实例层面分别进行分析。</p>
+<h3 id="Image-Level-Adaptation"><a href="#Image-Level-Adaptation" class="headerlink" title="Image-Level Adaptation"></a>Image-Level Adaptation</h3><p>​    使用贝叶斯公式，可以将联合分布分解成：</p>
+<script type="math/tex; mode=display">
+P(C,B,I) = P(C,B|I)P(I)</script><p>​    与分类问题相同，我们假设源域和目标域假设条件概率$P(C,B|I)$是相同的，领域分布偏移来源于边缘分布$P(I)$的不同，换句话说，检测器是一致，无论图片来源于那个域，结果都是相同的。在Faster RCNN中，图像表示$I$来源于基础的卷积网络。英雌，为了解决领域偏移问题，只要使得两个领域的图像表示相同即可:</p>
+<script type="math/tex; mode=display">
+P_{S}(I）=P_T(I)</script><h3 id="Instance-Level-Adaptation"><a href="#Instance-Level-Adaptation" class="headerlink" title="Instance-Level Adaptation"></a>Instance-Level Adaptation</h3><p>​    以此类推，联合分布也可以根据贝叶斯公式进行如下分解：</p>
+<script type="math/tex; mode=display">
+P(C,B,I) = P(C|B,I)P(B,I)</script><p>​    与lmage-Level Adaptation一样，我们也可以假设边缘分布$P(B,I)$是相同的，即：</p>
+<script type="math/tex; mode=display">
+P_{S}(B,I）=P_T(B,I)</script><p>​    则无论物体属于那个域的图片，类别标签都应该一样。</p>
+<p>​    这里$（B,I）$是每个实例的bounding box，尽管在目标域中数据集不包含检测框的标签，我们可以通过$P(B,I) = P(B|I)P(I)$来获取$P（B,I）$，其中，$P(B|I)$是检测框的预测器，这里默认$P(B|I)$是领域不变的。</p>
+<h3 id="Joint-Adaptation"><a href="#Joint-Adaptation" class="headerlink" title="Joint Adaptation"></a>Joint Adaptation</h3><p>​    理想状态下，可以通过Image-level或Instance-level实现领域对齐，并且如果假设$P(B|I)$存在且非零，两个层次的域对齐可以互相转化：</p>
+<script type="math/tex; mode=display">
+P_S(I) = P_T(I) \Leftrightarrow P_S(B,I) = P_T(B,I)</script><p>​    然而，基本上不能使得$P(B|I)$满足假设，原因有两点：</p>
+<ol>
+<li><p>$P(I)$不能实现完全的对齐，使得$P(B|I)$有偏差；</p>
+</li>
+<li><p>仅在源域有检测框的标签，而目标域没有，导致学习到的$P(B|I)$容易偏向目标域。</p>
+<p>因此，原文在image和instance层上都做了域对齐，并且使用一致性正则化减轻$P(B|I)$的误差。为了对齐两</p>
+</li>
+</ol>
+<p>个域的分布，文章训练了一个域分类器$h(x)$，假设领域的标签为$D$，图像级别的域分类可以视为$P(D|I)$，实例级别的域分类可以视为$P(D|B,I)$，通过贝叶斯理论，可知：</p>
+<script type="math/tex; mode=display">
+P(D|B,I)P(B|I)=P(B|D,I)P(D|I)</script><p>​    需要说明的是$P（B|I）$是域不变的检测框预测器，$P（B|D,I）$是域独立的检测框预测器，因而我们通过学习域独立的检测框预测器来解决$P(B|I)$的误差。</p>
+<h2 id="相关知识"><a href="#相关知识" class="headerlink" title="相关知识"></a>相关知识</h2><h3 id="H-divergence"><a href="#H-divergence" class="headerlink" title="H-divergence"></a>H-divergence</h3><p>​    H-divergence是domain adaptation常用的一个度量函数，用来区分两个分布的距离，公式如下：</p>
+<script type="math/tex; mode=display">
+d_H(D,D^{'})=2\sup_{h\in{H}}|Pr_{x{\sim}D}[h(x)=1]-Pr_{x{\sim}D^{'}}[h(x)=1|</script><p>该散度的意义实在一个函数空间$H$中找出一个函数$h$使得$Pr_{x{\sim}D}[h(x)=1]$ 的概率尽可能的大，$Pr_{x{\sim}D^{‘}}[h(x)=1$的概率尽可能的小，从而使得两个分布$D$和$D^{‘}$的距离尽可能大。</p>
+<p>论文中使用的公式如下：</p>
+<script type="math/tex; mode=display">
+d_H(S,T)=（1-\min_{h \in{H}}(err_s(h(x)) + err_t (h(x))))</script><p>S代表源域，T代表目标域，$d_H(S,T)$的大小取决于分类器h的错误率，错误率越高，两个领域越难区分。</p>
 
       
     </div>
@@ -363,8 +389,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/09/29/SENET/" rel="next" title="SENET">
-                <i class="fa fa-chevron-left"></i> SENET
+              <a href="/2019/10/07/Universal-Domain-Adaptation/" rel="next" title="Universal Domain Adaptation">
+                <i class="fa fa-chevron-left"></i> Universal Domain Adaptation
               </a>
             
           </div>
@@ -372,10 +398,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/10/07/Universal-Domain-Adaptation/" rel="prev" title="Universal Domain Adaptation">
-                Universal Domain Adaptation <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -496,7 +518,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CBAM"><span class="nav-number">1.</span> <span class="nav-text">CBAM</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#原理"><span class="nav-number">1.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法"><span class="nav-number">1.2.</span> <span class="nav-text">方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#通道模块"><span class="nav-number">1.2.1.</span> <span class="nav-text">通道模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#空间模块"><span class="nav-number">1.2.2.</span> <span class="nav-text">空间模块</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tricks"><span class="nav-number">1.3.</span> <span class="nav-text">Tricks</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Domain-Adaptive-Faster-R-CNN-for-Object-Detection-in-the-Wild"><span class="nav-number">1.</span> <span class="nav-text">Domain Adaptive Faster R-CNN for Object Detection in the Wild</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#存在问题"><span class="nav-number">1.1.</span> <span class="nav-text">存在问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#贡献点："><span class="nav-number">1.2.</span> <span class="nav-text">贡献点：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#理论分析"><span class="nav-number">1.3.</span> <span class="nav-text">理论分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Image-Level-Adaptation"><span class="nav-number">1.3.1.</span> <span class="nav-text">Image-Level Adaptation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Instance-Level-Adaptation"><span class="nav-number">1.3.2.</span> <span class="nav-text">Instance-Level Adaptation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Joint-Adaptation"><span class="nav-number">1.3.3.</span> <span class="nav-text">Joint Adaptation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#相关知识"><span class="nav-number">1.4.</span> <span class="nav-text">相关知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#H-divergence"><span class="nav-number">1.4.1.</span> <span class="nav-text">H-divergence</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -882,26 +904,6 @@
   
 
   
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 
