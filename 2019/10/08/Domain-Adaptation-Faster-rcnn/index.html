@@ -79,17 +79,19 @@
 
 
 
-<meta name="description" content="Domain Adaptive Faster R-CNN for Object Detection in the Wild​    目标检测通常都假设训练集和测试集独立同分布，然而在现实场景中，这样的假设往往都是不成立的，也导致了模型在现实应用中的表现急剧下降。DA-faster-rcnn就是用来解决这个问题，从而提升交叉领域中目标检测模型的鲁棒性。 存在问题 图像级别位移：图像风格，光照等； 实">
+<meta name="description" content="Domain Adaptive Faster R-CNN for Object Detection in the Wild​    目标检测通常都假设训练集和测试集独立同分布，然而在现实场景中，这样的假设往往都是不成立的，也导致了模型在现实应用中的表现急剧下降。DA-faster-rcnn就是用来解决这个问题，从而提升交叉领域中目标检测模型的鲁棒性。论文地址： http://openaccess.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Domain Adaptation Faster-rcnn">
 <meta property="og:url" content="http://yoursite.com/2019/10/08/Domain-Adaptation-Faster-rcnn/index.html">
 <meta property="og:site_name" content="杨学斌的博客">
-<meta property="og:description" content="Domain Adaptive Faster R-CNN for Object Detection in the Wild​    目标检测通常都假设训练集和测试集独立同分布，然而在现实场景中，这样的假设往往都是不成立的，也导致了模型在现实应用中的表现急剧下降。DA-faster-rcnn就是用来解决这个问题，从而提升交叉领域中目标检测模型的鲁棒性。 存在问题 图像级别位移：图像风格，光照等； 实">
+<meta property="og:description" content="Domain Adaptive Faster R-CNN for Object Detection in the Wild​    目标检测通常都假设训练集和测试集独立同分布，然而在现实场景中，这样的假设往往都是不成立的，也导致了模型在现实应用中的表现急剧下降。DA-faster-rcnn就是用来解决这个问题，从而提升交叉领域中目标检测模型的鲁棒性。论文地址： http://openaccess.">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-09T04:01:20.951Z">
+<meta property="og:image" content="http://yoursite.com/2019/10/08/Domain-Adaptation-Faster-rcnn/1572239978566.png">
+<meta property="og:updated_time" content="2019-10-28T05:19:44.389Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Domain Adaptation Faster-rcnn">
-<meta name="twitter:description" content="Domain Adaptive Faster R-CNN for Object Detection in the Wild​    目标检测通常都假设训练集和测试集独立同分布，然而在现实场景中，这样的假设往往都是不成立的，也导致了模型在现实应用中的表现急剧下降。DA-faster-rcnn就是用来解决这个问题，从而提升交叉领域中目标检测模型的鲁棒性。 存在问题 图像级别位移：图像风格，光照等； 实">
+<meta name="twitter:description" content="Domain Adaptive Faster R-CNN for Object Detection in the Wild​    目标检测通常都假设训练集和测试集独立同分布，然而在现实场景中，这样的假设往往都是不成立的，也导致了模型在现实应用中的表现急剧下降。DA-faster-rcnn就是用来解决这个问题，从而提升交叉领域中目标检测模型的鲁棒性。论文地址： http://openaccess.">
+<meta name="twitter:image" content="http://yoursite.com/2019/10/08/Domain-Adaptation-Faster-rcnn/1572239978566.png">
 
 
 
@@ -325,11 +327,12 @@
       
 
       
-        <h1 id="Domain-Adaptive-Faster-R-CNN-for-Object-Detection-in-the-Wild"><a href="#Domain-Adaptive-Faster-R-CNN-for-Object-Detection-in-the-Wild" class="headerlink" title="Domain Adaptive Faster R-CNN for Object Detection in the Wild"></a>Domain Adaptive Faster R-CNN for Object Detection in the Wild</h1><p>​    目标检测通常都假设训练集和测试集独立同分布，然而在现实场景中，这样的假设往往都是不成立的，也导致了模型在现实应用中的表现急剧下降。DA-faster-rcnn就是用来解决这个问题，从而提升交叉领域中目标检测模型的鲁棒性。</p>
+        <h1 id="Domain-Adaptive-Faster-R-CNN-for-Object-Detection-in-the-Wild"><a href="#Domain-Adaptive-Faster-R-CNN-for-Object-Detection-in-the-Wild" class="headerlink" title="Domain Adaptive Faster R-CNN for Object Detection in the Wild"></a>Domain Adaptive Faster R-CNN for Object Detection in the Wild</h1><p>​    目标检测通常都假设训练集和测试集独立同分布，然而在现实场景中，这样的假设往往都是不成立的，也导致了模型在现实应用中的表现急剧下降。DA-faster-rcnn就是用来解决这个问题，从而提升交叉领域中目标检测模型的鲁棒性。论文地址： <a href="http://openaccess.thecvf.com/content_cvpr_2018/papers/Chen_Domain_Adaptive_Faster_CVPR_2018_paper.pdf" target="_blank" rel="noopener">http://openaccess.thecvf.com/content_cvpr_2018/papers/Chen_Domain_Adaptive_Faster_CVPR_2018_paper.pdf</a> </p>
 <h2 id="存在问题"><a href="#存在问题" class="headerlink" title="存在问题"></a>存在问题</h2><ol>
 <li>图像级别位移：图像风格，光照等；</li>
 <li>实例级别位移：物体外观，大小等。</li>
 </ol>
+<p><img src="/2019/10/08/Domain-Adaptation-Faster-rcnn/1572239978566.png" alt="1572239978566"></p>
 <h2 id="贡献点："><a href="#贡献点：" class="headerlink" title="贡献点："></a>贡献点：</h2><ol>
 <li>设计了两个领域自适应组件，分别从图像级别和实例级别来减少领域差异，两个组件都是基于H-divergence设计的，通过设计领域分类器来实现特征对齐；</li>
 <li>对目标检测中的领域偏移问题从概率论的角度做了理论分析；</li>
